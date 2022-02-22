@@ -1,0 +1,64 @@
+.loginPage-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:4px;
+  margin-bottom:10px;
+}
+
+.loginPage-tools{
+  display:flex;
+  width:90%;
+  justify-content:space-between;
+  align-items:center;
+  margin-left:10px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.loginPage-footer{
+  font-size:13px;
+  text-align:center;
+}
+.loginPage-form{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+}
+
+.loginPage-form-input{
+  text-align:center;
+  width:100%;
+}
+
+.loginPage-title-close{
+  color:rgb(173,173,173);
+}
+.loginPage-title-close:hover{
+  color:black;
+  cursor:pointer;
+}
+
+.loginPage-form-input input{
+  height:26px;
+  outline:none;
+  width:90%;
+  border:1px solid rgb(233,233,233);
+  margin-bottom:10px;
+  font-size:12px;
+}
+
+.loginPage-loginBtn{
+  text-align:center;
+}
+.loginPage-loginBtn button{
+  width:92%;
+  font-size:12px;
+  height:30px;
+  background-color:rgb(0,127,255);
+  border:none;
+  color:white;
+}
+.loginPage-form-input input:focus{
+  border:1px solid rgb(0,127,255);
+}
