@@ -15,6 +15,10 @@
   margin-top:10px;
   margin-bottom:10px;
 }
+.loginPage-tools-signup:hover{
+  cursor: pointer;
+  color:rgb(0,127,255);
+}
 .loginPage-footer{
   font-size:13px;
   text-align:center;
@@ -29,6 +33,13 @@
 .loginPage-form-input{
   text-align:center;
   width:100%;
+}
+.pswNotMatch{
+  font-size: 12px;
+  margin-bottom: 4px;
+  margin-left:10px;
+  margin-top:-5px;
+  color:red;
 }
 
 .loginPage-title-close{
@@ -50,6 +61,13 @@
 
 .loginPage-loginBtn{
   text-align:center;
+
+}
+.loginPage-loginBtn button:hover{
+  cursor: pointer;
+}
+.loginPage-loginBtn button:disabled{
+  background-color: rgb(116, 183, 241);
 }
 .loginPage-loginBtn button{
   width:92%;

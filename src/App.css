@@ -87,7 +87,7 @@
   background-color:white;
   flex-direction:column;
   background-color:white;
-  height:200px;
+  height:auto;
   width:300px;
   padding:10px;
 }

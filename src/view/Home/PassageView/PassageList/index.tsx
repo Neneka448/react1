@@ -1,14 +1,13 @@
 import {useRequest} from "../../../../hooks/useRequest";
 import {PassageData} from "../../../../types/types";
 import './index.css'
-import {useEffect, useState} from "react";
 interface Props{
   category:string|undefined
 }
 export default function PassageList({category}:Props){
-  let request =useRequest<Array<PassageData>>({
+  let [request] =useRequest<Array<PassageData>>({
     method:'get',
-    url:'recommended'
+    url:'passage/recommended'
   })
   return (
     <>

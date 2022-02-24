@@ -5,13 +5,47 @@ import './App.css';
 import {Home} from "./view/Home/Home";
 import PassageView from "./view/Home/PassageView";
 import { LoginPage } from './view/LoginPage';
+import store from "./store/store";
+import {useRequest} from "./hooks/useRequest";
+import {LoginAction} from "./store/UserAction";
 
 interface NavProps{
   pageVisibilityCtl:()=>void,
+  pageVisibility:boolean
 }
 
+interface UserData{
+  token:string
+}
 
 function Nav(props:NavProps){
+  const [userInfo,setUserInfo]=useState(store.getState())
+  const [loginInfo,loginLoading,run,error]=useRequest<UserData>({
+    url:'auth/login',
+    method:'POST',
+    data:{
+      token:localStorage.getItem('token')
+    }
+  })
+  useEffect(()=>{
+    if(loginInfo){
+      store.dispatch(LoginAction(true,loginInfo.token))
+      localStorage.setItem('token',loginInfo!.token)
+    }else if(error){
+      console.log(error.desc)
+      localStorage.removeItem('token')
+    }
+  },[loginInfo])
+  useEffect(()=>{
+    if(userInfo.UserReducer.isLogin){
+      if(props.pageVisibility){
+        props.pageVisibilityCtl()
+      }
+    }
+  })
+  store.subscribe(()=>{
+    setUserInfo(store.getState())
+  })
   return (
     <div className="navbar-container">
       <div className="navbar-left">
@@ -44,10 +78,13 @@ function Nav(props:NavProps){
             <button>↓</button>
           </div>
         </div>
-        <button
-          className="navbar-right-loginBtn"
-          onClick={props.pageVisibilityCtl}
-        >登录</button>
+        {
+          userInfo.UserReducer.isLogin?'欢迎':
+          <button
+            className="navbar-right-loginBtn"
+            onClick={props.pageVisibilityCtl}
+          >登录</button>
+        }
       </div>
     </div>
   )
@@ -71,6 +108,7 @@ function App() {
         pageVisibilityCtl={()=>{
           setLoginPageVisibility(!LoginPageVisibility)
         }}
+        pageVisibility={LoginPageVisibility}
       />
       {LoginPageVisibility &&
         <>
