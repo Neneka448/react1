@@ -5,14 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql2_1 = __importDefault(require("mysql2"));
 class _Mysql {
-    constructor() {
-        this._mysql = mysql2_1.default.createConnection({
-            host: '120.27.240.219',
-            user: 'root',
-            password: 'chenkai77',
-            database: 'passages'
-        });
-    }
+    static _instance = new _Mysql();
+    _mysql = mysql2_1.default.createConnection({
+        host: '120.27.240.219',
+        user: 'root',
+        password: 'chenkai77',
+        database: 'passages'
+    });
+    constructor() { }
     static getInstance() {
         return _Mysql._instance._mysql;
     }
@@ -25,7 +25,6 @@ class _Mysql {
         });
     }
 }
-_Mysql._instance = new _Mysql();
 async function useMysql(sql) {
     return new Promise((resolve, reject) => {
         _Mysql.getInstance().query(sql, (err, row) => {

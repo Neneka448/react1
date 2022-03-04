@@ -1,1 +1,2 @@
-export default function useJWTCheck(token: string): string | Error;
+import JWT from "jsonwebtoken";
+export default function useJWTCheck(token: string): JWT.JwtPayload | string;

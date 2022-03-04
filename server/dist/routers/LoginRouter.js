@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const koa_router_1 = __importDefault(require("koa-router"));
 const useMysql_1 = __importDefault(require("../hooks/useMysql"));
 const jsonwebtoken_1 = __importStar(require("jsonwebtoken"));
+const fs_1 = __importDefault(require("fs"));
 const router = new koa_router_1.default({
     prefix: '/api/auth/'
 });
@@ -81,7 +82,7 @@ router.post('login', async (ctx, next) => {
         return;
     }
     console.log(userInfo);
-    let userDataArr = await useMysql_1.default(`select id,token from user where acc='${userInfo.acc}' and psw='${userInfo.psw}'`);
+    let userDataArr = await (0, useMysql_1.default)(`select id from user where acc='${userInfo.acc}' and psw='${userInfo.psw}'`);
     console.log(userDataArr);
     if (userDataArr instanceof Error || userDataArr.length < 1) {
         ctx.response.body = {
@@ -92,16 +93,71 @@ router.post('login', async (ctx, next) => {
         return;
     }
     let userData = userDataArr[0];
-    userData.token = jsonwebtoken_1.default.sign({
-        id: userData.id
-    }, RSAPrivateKey, {
-        expiresIn: '60s',
-    });
     ctx.response.body = {
         status: 'ok',
-        data: JSON.stringify({ token: userData.token }),
+        data: JSON.stringify({ token: jsonwebtoken_1.default.sign({
+                id: userData.id
+            }, RSAPrivateKey, {
+                expiresIn: '60s',
+            }) }),
         temp: new Date().getTime().toString()
     };
+});
+router.post('signup', async (ctx) => {
+    let userInfo = ctx.request.body;
+    if (userInfo === undefined) {
+        ctx.response.body = {
+            status: 'error',
+            data: JSON.stringify({ desc: 'NoInfo' }),
+            temp: new Date().getTime().toString()
+        };
+        return;
+    }
+    let data = await (0, useMysql_1.default)(`SELECT id from user where acc='${userInfo.acc}'`);
+    if (data instanceof Error || data.length >= 1) {
+        ctx.response.body = {
+            status: 'error',
+            data: JSON.stringify({ desc: 'duplicate' }),
+            temp: new Date().getTime().toString()
+        };
+        return;
+    }
+    let signupInfo = await (0, useMysql_1.default)(`insert into user (acc,psw) values ('${userInfo.acc}','${userInfo.psw}')`);
+    if (signupInfo instanceof Error) {
+        console.log(signupInfo);
+        ctx.response.body = {
+            status: 'error',
+            data: JSON.stringify({ desc: 'unknownError' }),
+            temp: new Date().getTime().toString()
+        };
+        return;
+    }
+    let userDataArr = await (0, useMysql_1.default)(`select id from user where acc='${userInfo.acc}' and psw='${userInfo.psw}'`);
+    if (userDataArr instanceof Error) {
+        ctx.response.body = {
+            status: 'error',
+            data: JSON.stringify({ desc: 'unknownError' }),
+            temp: new Date().getTime().toString()
+        };
+        return;
+    }
+    ctx.response.body = {
+        status: 'ok',
+        data: JSON.stringify({ token: jsonwebtoken_1.default.sign({
+                id: userDataArr[0].id
+            }, RSAPrivateKey, {
+                expiresIn: '60s',
+            }) }),
+        temp: new Date().getTime().toString()
+    };
+});
+router.post('update', async (ctx) => {
+    let userInfo = ctx.request.body;
+    console.log(userInfo);
+    fs_1.default.writeFileSync('./aaa.gif', userInfo.aaa, {
+        encoding: 'binary'
+    });
+    ctx.response.body = 1;
 });
 const RSAPrivateKey = `-----BEGIN RSA PRIVATE KEY-----
 MIIBOgIBAAJBAJ0sBvx/ZFqgtxaEHVYYIwenDncoPG7j9dfuIQy/RRxx7cyF/CGX

@@ -12,7 +12,7 @@ router.get('recommended', async (ctx, next) => {
     ctx.set('Content-Type', 'application/json');
     let startTime = new Date().getTime();
     let endTime = 0;
-    let body = await useMysql_1.default(`SELECT id,title,abstract,date FROM passageData`).catch(e => e);
+    let body = await (0, useMysql_1.default)(`SELECT id,title,abstract,date FROM passageData`).catch(e => e);
     if (body instanceof Error) {
         ctx.response.body = {
             status: 'error',
@@ -29,6 +29,34 @@ router.get('recommended', async (ctx, next) => {
     }
     endTime = new Date().getTime();
     console.log(endTime - startTime);
+});
+router.get('detail', async (ctx) => {
+    let urlParams = ctx.request.URL.searchParams;
+    let id = urlParams.get('id');
+    if (id) {
+        let passage = await (0, useMysql_1.default)(`select convert(content using utf8mb4) as content from passageData where id=${id}`);
+        if (passage instanceof Error) {
+            ctx.response.body = {
+                status: 'error',
+                data: JSON.stringify({ desc: 'queryError' }),
+                temp: new Date().getTime().toString()
+            };
+        }
+        else {
+            ctx.response.body = {
+                status: 'ok',
+                data: JSON.stringify({ id: id, content: passage[0].content }),
+                temp: new Date().getTime().toString()
+            };
+        }
+    }
+    else {
+        ctx.response.body = {
+            status: 'error',
+            data: JSON.stringify({ desc: 'NoID' }),
+            temp: new Date().getTime().toString()
+        };
+    }
 });
 exports.default = router;
 //# sourceMappingURL=RecommendRouter.js.map

@@ -22,7 +22,7 @@ class _Mysql{
   }
 }
 
-export default async function useMysql<T>(sql:string):Promise<Array<T>>{
+export default async function useMysql<T>(sql:string):Promise<Array<T>|Error>{
   return new Promise<T>((resolve,reject)=>{
     _Mysql.getInstance().query(sql,(err,row:T)=>{
       err?reject(err):resolve(row)

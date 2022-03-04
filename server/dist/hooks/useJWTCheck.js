@@ -22,20 +22,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importStar(require("jsonwebtoken"));
 function useJWTCheck(token) {
     try {
-        jsonwebtoken_1.default.verify(token, RSAPrivateKey);
+        let t = jsonwebtoken_1.default.verify(token, RSAPrivateKey);
+        return t;
     }
     catch (e) {
         if (e instanceof jsonwebtoken_1.TokenExpiredError) {
-            return new Error('TokenExpired');
+            throw new Error('TokenExpired');
         }
         else if (e instanceof jsonwebtoken_1.JsonWebTokenError) {
-            return new Error('TokenError');
+            throw new Error('TokenError');
         }
         else {
-            return new Error('UnknownError');
+            throw new Error('UnknownError');
         }
     }
-    return 'ok';
 }
 exports.default = useJWTCheck;
 const RSAPrivateKey = `-----BEGIN RSA PRIVATE KEY-----

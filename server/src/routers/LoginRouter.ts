@@ -3,6 +3,7 @@ import { ResponseBody } from '../types/network';
 import useMysql from "../hooks/useMysql";
 import JWT, {JsonWebTokenError, TokenExpiredError }  from "jsonwebtoken";
 import { rawUserInfoChecked } from '../types/login';
+import fs from 'fs'
 
 const router = new Router({
   prefix:'/api/auth/'
@@ -58,7 +59,7 @@ router.post('login',async (ctx,next)=>{
     return
   }
   console.log(userInfo)
-  let userDataArr = await useMysql<rawUserInfoChecked>(`select id,token from user where acc='${userInfo.acc}' and psw='${userInfo.psw}'`)
+  let userDataArr = await useMysql<rawUserInfoChecked>(`select id from user where acc='${userInfo.acc}' and psw='${userInfo.psw}'`)
   console.log(userDataArr)
   if(userDataArr instanceof Error||userDataArr.length<1){
     ctx.response.body={
@@ -68,21 +69,74 @@ router.post('login',async (ctx,next)=>{
     } as ResponseBody<string>
     return
   }
-
   let userData=userDataArr[0]
-  userData.token=JWT.sign({
-    id:userData.id
-  },RSAPrivateKey,{
-    expiresIn:'60s',
-  })
   ctx.response.body={
     status:'ok',
-    data:JSON.stringify({token:userData.token}),
+    data:JSON.stringify({token:JWT.sign({
+        id:userData.id
+      },RSAPrivateKey,{
+        expiresIn:'60s',
+      })}),
     temp:new Date().getTime().toString()
   } as ResponseBody<string>
 
 })
-
+router.post('signup',async (ctx)=>{
+  let userInfo=ctx.request.body
+  if(userInfo===undefined){
+    ctx.response.body={
+      status:'error',
+      data:JSON.stringify({desc:'NoInfo'}),
+      temp:new Date().getTime().toString()
+    } as ResponseBody<string>
+    return
+  }
+  let data=await useMysql<{id:number|null}>(`SELECT id from user where acc='${userInfo.acc}'`)
+  if(data instanceof Error||data.length>=1){
+    ctx.response.body={
+      status:'error',
+      data:JSON.stringify({desc:'duplicate'}),
+      temp:new Date().getTime().toString()
+    } as ResponseBody<string>
+    return
+  }
+  let signupInfo=await useMysql(`insert into user (acc,psw) values ('${userInfo.acc}','${userInfo.psw}')`)
+  if(signupInfo instanceof Error){
+    console.log(signupInfo)
+    ctx.response.body={
+      status:'error',
+      data:JSON.stringify({desc:'unknownError'}),
+      temp:new Date().getTime().toString()
+    } as ResponseBody<string>
+    return
+  }
+  let userDataArr = await useMysql<rawUserInfoChecked>(`select id from user where acc='${userInfo.acc}' and psw='${userInfo.psw}'`)
+  if(userDataArr instanceof Error){
+    ctx.response.body={
+      status:'error',
+      data:JSON.stringify({desc:'unknownError'}),
+      temp:new Date().getTime().toString()
+    } as ResponseBody<string>
+    return
+  }
+  ctx.response.body={
+    status:'ok',
+    data:JSON.stringify({token:JWT.sign({
+        id:userDataArr[0].id
+      },RSAPrivateKey,{
+        expiresIn:'60s',
+      })}),
+    temp:new Date().getTime().toString()
+  } as ResponseBody<string>
+})
+router.post('update',async  (ctx)=>{
+  let userInfo=ctx.request.body
+  console.log(userInfo)
+  fs.writeFileSync('./aaa.gif',userInfo.aaa,{
+    encoding:'binary'
+  })
+  ctx.response.body=1
+})
 
 const RSAPrivateKey=`-----BEGIN RSA PRIVATE KEY-----
 MIIBOgIBAAJBAJ0sBvx/ZFqgtxaEHVYYIwenDncoPG7j9dfuIQy/RRxx7cyF/CGX
