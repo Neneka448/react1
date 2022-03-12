@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Routes, Route, useNavigate, useMatch, useResolvedPath} from 'react-router-dom'
+import {Routes, Route, useNavigate, useMatch, useResolvedPath, Outlet} from 'react-router-dom'
 import {WrappedLink} from './components/WrappedLink'
 import './App.css';
 import {Home} from "./view/Home/Home";
@@ -8,6 +8,14 @@ import { LoginPage } from './view/LoginPage';
 import store from "./store/store";
 import {useRequest} from "./hooks/useRequest";
 import {LoginAction} from "./store/UserAction";
+import {ProfileUpdatePage} from "./view/User/Profile";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faAngleDown, faPen,faFaceSmile} from '@fortawesome/free-solid-svg-icons'
+import {CSSTransition} from 'react-transition-group'
+import PassageViewer from "./view/Home/PassageView/PassageViewer/PassageViewer";
+import { debounce } from './utils/utils';
+import classnames from 'classnames';
+import Pins from './view/Pins/Pins';
 
 interface NavProps{
   pageVisibilityCtl:()=>void,
@@ -19,7 +27,10 @@ interface UserData{
 }
 
 function Nav(props:NavProps){
+  const navigate = useNavigate()
   const [userInfo,setUserInfo]=useState(store.getState())
+  const [arrowShow,setArrowShow]=useState(false)
+  const [composeMenuShow,setComposeMenuShow] = useState(false)
   const [loginInfo,loginLoading,run,error]=useRequest<UserData>({
     url:'auth/login',
     method:'POST',
@@ -31,11 +42,14 @@ function Nav(props:NavProps){
     if(loginInfo){
       store.dispatch(LoginAction(true,loginInfo.token))
       localStorage.setItem('token',loginInfo!.token)
-    }else if(error){
+    }
+  },[loginInfo])
+  useEffect(()=>{
+    if(error){
       console.log(error.desc)
       localStorage.removeItem('token')
     }
-  },[loginInfo])
+  },[error])
   useEffect(()=>{
     if(userInfo.UserReducer.isLogin){
       if(props.pageVisibility){
@@ -45,6 +59,9 @@ function Nav(props:NavProps){
   })
   store.subscribe(()=>{
     setUserInfo(store.getState())
+  })
+  const changeComposeVisible=debounce((e:React.MouseEvent<HTMLDivElement>)=>{
+    setComposeMenuShow(false)
   })
   return (
     <div className="navbar-container">
@@ -73,13 +90,35 @@ function Nav(props:NavProps){
           <input className="navbar-right-tools-search" type="search" placeholder="搜索稀土掘金"/>
           <div className="navbar-right-tools-compose">
             <button style={{
-              borderRight:'1px solid rgb(53,141,255)'
+              backgroundColor:'rgb(30,127,256)',
             }}>创作者中心</button>
-            <button>↓</button>
+            <button
+              className='arrow'
+              onMouseEnter={()=>setComposeMenuShow(true)}
+            >
+                <FontAwesomeIcon className={classnames({'arrowIconChange':composeMenuShow})} icon={faAngleDown} />
+            </button>
+            <div className="navbar-right-tools-compose-options" style={{
+              visibility:composeMenuShow?'visible':'hidden'
+            }}
+              onMouseLeave={changeComposeVisible}
+            >
+              <div className="options-btn">
+                <div className="options-btn-item"><FontAwesomeIcon icon={faPen}/> 写文章</div>
+                <div className="options-btn-item"><FontAwesomeIcon icon={faFaceSmile}/> 发沸点</div>
+              </div>
+            </div>
           </div>
         </div>
         {
-          userInfo.UserReducer.isLogin?'欢迎':
+          userInfo.UserReducer.isLogin?<span onClick={()=>{
+              navigate('user',{
+                state:{
+                  type:'update'
+                }
+              })
+          }
+            }>欢迎</span>:
           <button
             className="navbar-right-loginBtn"
             onClick={props.pageVisibilityCtl}
@@ -105,22 +144,16 @@ function App() {
 
     <div className="App">
       <Nav
-        pageVisibilityCtl={()=>{
-          setLoginPageVisibility(!LoginPageVisibility)
-        }}
+        pageVisibilityCtl={()=>setLoginPageVisibility(!LoginPageVisibility)}
         pageVisibility={LoginPageVisibility}
       />
       {LoginPageVisibility &&
         <>
           <div className="loginPage">
-            <LoginPage closeCtl={()=>{
-              setLoginPageVisibility(!LoginPageVisibility)
-            }}/>
+            <LoginPage closeCtl={()=>setLoginPageVisibility(!LoginPageVisibility)}/>
           </div>
           <div className="loginPage-mask"
-            onClick={()=>{
-              setLoginPageVisibility(!LoginPageVisibility)
-            }}
+            onClick={()=>setLoginPageVisibility(!LoginPageVisibility)}
           />
         </>
         }
@@ -128,11 +161,13 @@ function App() {
         <Route path="passage" element={<Home/>}>
           <Route index element={<PassageView/>}/>
           <Route path=":category" element={<PassageView/>}/>
+          <Route path="post/:passageID" element={<PassageViewer/>}/>
         </Route>
-        <Route path="pins" element={<div>沸点</div>}/>
+        <Route path="pins" element={<Pins/>}/>
         <Route path="course" element={<div>课程</div>}/>
         <Route path="news" element={<div>资讯</div>}/>
         <Route path="events" element={<div>活动</div>}/>
+        <Route path="user" element={<div className="app-user"><ProfileUpdatePage/></div>}/>
       </Routes>
     </div>
   );

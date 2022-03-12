@@ -1,17 +1,37 @@
 import {PassageData} from "./types";
 
-interface UserInfo{
+export interface UserInfo{
   avatar:string,
   username:string,
-  signature?:string,
-  occupation?:string,
-  company?:string
+  signature:string,
+  occupation:string,
+  company:string
 }
-interface DynamicInfo{
+export interface DynamicInfo{
+  title:string,
+  desc:string,
+  dynamicID:string,
+  author:UserInfo,
+  content:string,
+  likes:number,
+  comment:Array<Comment>
+  date:string
+}
 
+export interface Comment{
+  author:UserInfo,
+  date:string,
+  content:string,
+  reply:Array<Comment>
+  likes:number,
 }
 interface Column{
-
+  title:string,
+  desc:string,
+  date:string,
+  columnID:string,
+  passageNumber:number,
+  subscriber:number
 }
 interface Course{
 
@@ -19,24 +39,29 @@ interface Course{
 interface News{
 
 }
-interface Like{
-
-}
-interface Tag{
-
+export interface Tag{
+  img:string,
+  title:string,
+  tagID:string
 }
 interface Collection{
-
+  title:string,
+  collectionID:string,
+  passages:Array<PassageData>
+  subscriber:number
 }
-interface Bandage{
-
+interface Badge{
+  badgeID:string,
+  img:string,
+  title:string,
+  date:string
 }
 interface UserDynamic{
   dynamic:Array<DynamicInfo>,
   passages:Array<PassageData>,
   columns:Array<Column>,
   pins:Array<DynamicInfo>,
-  likes:Array<Like>,
+  likes:Array<UserInfo>,
   collections:Array<Collection>,
   tags:Array<Tag>,
   news:Array<News>,
@@ -44,27 +69,23 @@ interface UserDynamic{
 }
 
 interface Achievement {
-
+  likesCount:number,
+  watchCount:number,
+  value:number
 }
 
-interface FollowingList {
-}
-
-interface FollowerList {
-
-}
 
 interface UserState{
   isLogin:boolean
   token:string,
   id:string,
   joinTime:string,
-  badges:Array<Bandage>
+  badges:Array<Badge>,
   userInfo:UserInfo,
   userDynamic:UserDynamic,
   achievement:Achievement,
-  following:FollowingList,
-  follower:FollowerList
+  following:Array<UserInfo>,
+  follower:Array<UserInfo>
 }
 
 export type{

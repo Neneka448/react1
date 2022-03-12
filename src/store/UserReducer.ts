@@ -1,5 +1,5 @@
 import {UserState} from "../types/UserTypes"
-import {LOGIN_ACTION, UserReducerType} from "./UserAction";
+import {LOGIN_ACTION, PROFILE_UPDATE_ACTION, UserReducerType} from "./UserAction";
 
 const defaultState:UserState={
   isLogin:false,
@@ -25,9 +25,13 @@ const defaultState:UserState={
     news:[],
     courses:[]
   },
-  achievement:{},
-  following:{},
-  follower:{}
+  achievement:{
+    likesCount:0,
+    watchCount:0,
+    value:0
+  },
+  following:[],
+  follower:[]
 }
 
 export default (state=defaultState,action:UserReducerType) =>{
@@ -37,7 +41,12 @@ export default (state=defaultState,action:UserReducerType) =>{
         ...state,
         ...action.payload
       }
-      break
+    case PROFILE_UPDATE_ACTION:
+      return {
+        ...state,
+        userInfo:action.payload
+      }
+
     default:
       return state
   }

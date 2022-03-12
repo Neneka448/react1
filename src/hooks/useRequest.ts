@@ -29,13 +29,22 @@ class AxiosIns{
 }
 
 function useRequest<T>(config:AxiosRequestConfig,options?:RequestOptions)
-  :[T|undefined,boolean,()=>void,RequestError|null]
+  :[T|undefined,boolean,(payload?:URLSearchParams)=>void,RequestError|null]
 {
   const [requestData,setRequestData] = useState<T>()
   const [ready,setReady] = useState(false)
   const [loading,setLoading] = useState(false)
   const [error,setError] = useState<RequestError|null>(null)
-  const run =()=>{
+  const [configs,setConfigs] = useState(config)
+  const run =(payload?:URLSearchParams)=>{
+    if(payload){
+      if(configs.method?.toLowerCase()==='get'){
+        let url=config.url+'?'+payload.toString()
+        setConfigs({...configs,url:url})
+      }else if(config.method?.toLowerCase()==='post'){
+        setConfigs({...configs,data:payload})
+      }
+    }
     setReady(true)
   }
   useEffect(  ()=>{
@@ -44,7 +53,8 @@ function useRequest<T>(config:AxiosRequestConfig,options?:RequestOptions)
       let cancelToken=Axios.CancelToken
       let source=cancelToken.source()
       config.cancelToken=source.token
-      AxiosIns.getInstance().request(config).then((v:ResponseBody)=>{
+      AxiosIns.getInstance().request(configs).then((v:ResponseBody)=>{
+        console.log(v)
         if(v.status==='error'){
           setError(JSON.parse(v.data) as RequestError)
         }else if(v.status==='ok'){
@@ -54,12 +64,11 @@ function useRequest<T>(config:AxiosRequestConfig,options?:RequestOptions)
         setLoading(false)
         setReady(false)
       })
-
       return ()=>{
         source.cancel()
       }
     }
-  },[ready])
+  },[ready,configs])
 
   return [requestData,loading,run,error]
 }

@@ -3,6 +3,8 @@ import './index.css'
 import {useRequest} from "../../hooks/useRequest";
 import store from "../../store/store";
 import {LoginAction} from "../../store/UserAction";
+import {useNavigate} from "react-router-dom";
+import Button from '../../components/Button/Button'
 interface LoginPageProps{
   closeCtl:()=>void;
 }
@@ -36,15 +38,31 @@ export function LoginPage(props:LoginPageProps){
   },{
     manual:true
   })
+  const navigate = useNavigate()
   useEffect(()=>{
-    if(error){
-      alert('登陆失败')
-    }else if(data){
+    if(data){
       console.log(data.token)
       localStorage.setItem('token',data.token)
       store.dispatch(LoginAction(true,data.token))
     }
-  },[data,error])
+  },[data])
+  useEffect(()=>{
+    if(error){
+      console.log(error)
+      alert('登陆失败')
+    }
+  },[error])
+  useEffect(()=>{
+    if(signupData){
+      localStorage.setItem('token',signupData.token)
+      store.dispatch(LoginAction(true,signupData.token))
+      navigate('/user',{
+        state:{
+          type:'newuser'
+        }
+      })
+    }
+  },[signupData])
   return (
     <>
       <header className="loginPage-title">
@@ -73,17 +91,22 @@ export function LoginPage(props:LoginPageProps){
         <div className="loginPage-loginBtn">
           {
             pageState==='login'?
-              <button onClick={()=>{
-                login()
-              }} disabled={loginLoading}>{loginLoading?'登录中':'登录'}</button>
+              <Button
+                size="default"
+                btnType="primary"
+                onClick={()=>login()}
+                loading={loginLoading}
+                disabled={loginLoading}
+              >{loginLoading?'登录中':'登录'} </Button>
               :
-              <button onClick={()=>{
-                if(isRepeatPswOk){
-                  signup()
-                }
-              }} disabled={signupLoading}>{signupLoading?'注册中':'注册'}</button>
+              <Button
+                size="default"
+                btnType="primary"
+                onClick={()=>isRepeatPswOk&&signup()}
+                loading={loginLoading}
+                disabled={signupLoading||!isRepeatPswOk}
+              >{signupLoading?'注册中':'注册'}</Button>
           }
-
         </div>
         <div className="loginPage-tools">
           {

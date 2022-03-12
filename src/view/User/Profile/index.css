@@ -1,0 +1,128 @@
+.user-profile-form-baseInfo{
+  display: flex;
+  background-color: white;
+  flex: 0 0 80%;
+}
+.user-profile-form{
+  display: flex;
+
+}
+.user-profile-form-setting-nav{
+  flex:0 0 18%;
+  margin-right:2%;
+  background-color: white;
+}
+.user-profile-back{
+  background-color: white;
+  padding:10px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+
+}
+
+
+.user-profile-form-baseInfo-item{
+  margin-left:20px;
+  margin-top:20px;
+  flex:0 0 60%;
+}
+
+.user-profile-form-baseInfo-item div:first-child{
+
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+
+}
+
+.user-profile-form-baseInfo-item div:not(:first-child){
+  padding:30px;
+  border-top:1px solid rgb(234,234,234);
+
+}
+.user-profile-form-baseInfo-item div:last-child{
+  border-bottom:1px solid rgb(234,234,234);
+}
+
+.user-profile-form-baseInfo-item div input{
+  width: 70%;
+  outline: none;
+  border: 1px solid rgb(221,221,221);
+  background-color: rgb(250,250,250);
+}
+.user-profile-form-baseInfo-item div textarea{
+  resize:vertical;
+  outline: none;
+  border: 1px solid rgb(221,221,221);
+  background-color: rgb(250,250,250);
+  width: 70%;
+}
+.user-profile-form-baseInfo-item div input:hover{
+  border: 1px solid rgb(229,230,235);
+  background-color: rgb(229,230,235);
+}
+
+.user-profile-form-baseInfo-item div text:focus{
+  border: 1px solid rgb(0,127,255);
+  background-color: white;
+}
+
+.user-profile-form-baseInfo-item div textarea:hover{
+  border: 1px solid rgb(229,230,235);
+  background-color: rgb(229,230,235);
+}
+
+.user-profile-form-baseInfo-item div textarea:focus{
+  border: 1px solid rgb(0,127,255);
+  background-color: white;
+}
+
+.user-profile-updateBtn{
+  background-color: rgb(56,142,255);
+  color:white;
+  font-size: 14px;
+  padding: 10px;
+  border: none;
+  border-radius: 2px;
+}
+.user-profile-updateBtn:hover{
+  cursor: pointer;
+}
+.user-profile-updateBtn:active{
+  background-color: rgb(28,120,240);
+
+}
+.user-profile-updateBtn:disabled{
+  background-color: rgb(116, 183, 241);
+}
+
+.user-profile-label{
+  margin-right: 30px;
+}
+
+.user-profile-form-avatar{
+  margin:20px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-form-avatar img{
+  border-radius: 50px;
+}
+
+.user-profile-form-avatar-btn{
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  color:transparent;
+  font-size: 14px;
+  line-height: 100px;
+  border-radius: 50px;
+}
+.user-profile-form-avatar-btn:hover{
+  background-color: rgba(0,0,0,0.3);
+  color:white;
+  cursor: pointer;
+
+}

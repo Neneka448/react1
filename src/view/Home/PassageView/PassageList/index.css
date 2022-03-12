@@ -5,6 +5,7 @@
 }
 .passage-list-element:hover{
   background-color:rgb(250,250,250);
+  cursor: pointer;
 }
 
 .passage-body{

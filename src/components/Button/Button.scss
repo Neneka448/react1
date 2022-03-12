@@ -1,0 +1,65 @@
+
+.button-base{
+  border-radius:2px;
+  border:none;
+  outline:none;
+  color: white;
+  vertical-align: text-bottom;
+}
+
+.button-base:hover{
+  cursor: pointer;
+}
+
+@mixin button-type ($color) {
+  background-color:$color
+
+}
+@mixin button-size ($fontSize,$h,$w) {
+  font-size: $fontSize;
+  width: $w;
+  height:$h;
+}
+
+.button-primary{
+  @include button-type(rgb(0,127,255));
+}
+.button-primary:disabled{
+  @include button-type(rgb(84, 158, 252));
+}
+.button-danger{
+  @include button-type(rgb(192,44,56))
+}
+.button-danger:hover{
+  @include button-type(rgb(243, 91, 102))
+}
+
+
+.button-default{
+  @include button-size(1rem,2rem,8rem);
+}
+.button-small{
+  @include button-size(0.8rem,1.8rem,6rem);
+}
+.button-large{
+  @include button-size(1.5rem,3rem,10rem);
+}
+
+@keyframes loading-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-loading{
+  margin-right: 5px;
+  animation-name: loading-rotate;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+

@@ -1,14 +1,33 @@
 import {useRequest} from "../../../../hooks/useRequest";
-import {PassageData} from "../../../../types/types";
+import {PassageData, PassageDetail} from "../../../../types/types";
 import './index.css'
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 interface Props{
   category:string|undefined
 }
 export default function PassageList({category}:Props){
+  const navigate=useNavigate()
   let [request] =useRequest<Array<PassageData>>({
     method:'get',
     url:'passage/recommended'
   })
+  let [passageData,loadingPassageData,getPassageData,passageDataRequestError] =useRequest<PassageDetail>({
+    method:'get',
+    url:'passage/detail'
+  },{
+    manual:true
+  })
+  useEffect(()=>{
+    if(passageData&&request){
+      navigate(`/passage/post/${passageData.id}`,{
+        state:{
+          detail:passageData,
+          baseInfo:request.find(v=>v.id===parseInt(passageData!.id))
+        }
+      })
+    }
+  },[passageData,request])
   return (
     <>
       {category==='recommended'?
@@ -39,6 +58,9 @@ export default function PassageList({category}:Props){
             }}
             className="passage-list-element"
             key={v.id}
+            onClick={()=>{
+              getPassageData(new URLSearchParams(`id=${v.id}`))
+            }}
           >
             <div className="entry">
               <div className="passage-header">
