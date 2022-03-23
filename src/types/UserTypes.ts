@@ -24,6 +24,7 @@ export interface Comment{
   content:string,
   reply:Array<Comment>
   likes:number,
+  commentID:string
 }
 interface Column{
   title:string,

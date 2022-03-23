@@ -1,0 +1,43 @@
+.pins-main-btnGroup{
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top:10px;
+  align-items: center;
+}
+.pins-main-btnGroup-left{
+  display: flex;
+  justify-content: space-around;
+  width: fit-content;
+}
+
+.pins-main-btnGroup-left div:not(:first-child){
+  margin-left:5px;
+}
+
+.pins-main-btnGroup-item:hover{
+  color:rgb(30,128,255);
+  cursor: pointer;
+}
+.pins-main-input{
+  text-align: center;
+}
+.pins-main-input textarea{
+  resize:none;
+  overflow: hidden;
+  margin-top:10px;
+  border:1px solid transparent;
+  outline: none;
+  background-color:rgb(242,243,245);
+  padding: 6px;
+  border-radius: 2px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+.pins-main-input textarea:focus{
+  border:1px solid rgb(30,128,255);
+  background-color: white;
+}
+

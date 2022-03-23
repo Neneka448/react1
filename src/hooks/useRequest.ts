@@ -1,8 +1,9 @@
 import Axios, {AxiosInstance, AxiosRequestConfig} from 'axios'
 import {useEffect, useState } from 'react'
 
-interface RequestOptions{
+interface RequestOptions<T>{
   manual?:boolean;
+  callback?:(data:T|undefined,err:RequestError|null)=>void
 }
 interface ResponseBody{
   status:'ok'|'error';
@@ -16,11 +17,12 @@ interface RequestError{
 class AxiosIns{
   private static _instance = new AxiosIns()
   private _ins:AxiosInstance=Axios.create({
-    baseURL:'http://localhost:8888/api/',
+    baseURL:process.env.REACT_APP_BASE_URL,
   })
   private constructor() {}
   static getInstance(){
     return AxiosIns._instance
+
   }
   public async request(config:AxiosRequestConfig){
     let rawData = await this._ins(config)
@@ -28,8 +30,10 @@ class AxiosIns{
   }
 }
 
-function useRequest<T>(config:AxiosRequestConfig,options?:RequestOptions)
-  :[T|undefined,boolean,(payload?:URLSearchParams)=>void,RequestError|null]
+function useRequest<T>(
+  config:AxiosRequestConfig
+  ,options?:RequestOptions<T>
+): [(T | undefined),boolean, ((payload?: URLSearchParams) => void), (RequestError | null)]
 {
   const [requestData,setRequestData] = useState<T>()
   const [ready,setReady] = useState(false)
@@ -47,6 +51,13 @@ function useRequest<T>(config:AxiosRequestConfig,options?:RequestOptions)
     }
     setReady(true)
   }
+  useEffect(()=>{
+    if(requestData){
+      if(options?.callback){
+        options.callback(requestData,error)
+      }
+    }
+  },[requestData,error])
   useEffect(  ()=>{
     if(!options||!options.manual||(options.manual&&ready)){
       setLoading(true)

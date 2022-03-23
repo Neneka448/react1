@@ -1,7 +1,18 @@
-import Mysql from 'mysql2'
+import Mysql from 'mysql2';
+import {Sequelize} from 'sequelize';
 
 class _Mysql{
   private static _instance=new _Mysql()
+  // sequelize = new Sequelize('passages','root','password',{
+  //   dialect:'mysql',
+  //   host:'120.27.240.219',
+  //   port:3306,
+  //   logging:true,
+  //   pool:{
+  //     max:5,
+  //     idle:
+  //   }
+  // })
   private _mysql=Mysql.createConnection({
     host:'120.27.240.219',
     user:'root',

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faComment, faHeart, faMessage, faThumbsUp} from '@fortawesome/free-regular-svg-icons'
 import { faShareNodes } from '@fortawesome/free-solid-svg-icons'
 import {useState} from "react";
+import CommentInput from "@/components/CommentInput/CommentInput";
 
 interface DynamicBoxProps{
   passage:DynamicInfo
@@ -11,6 +12,7 @@ interface DynamicBoxProps{
 
 export default function DynamicBox({passage}:DynamicBoxProps){
   const [showComment,setShowComment] = useState(false)
+  const [commentInput,setCommentInput] = useState('')
   return(
     <>
       <div className="dynamicBox-header">
@@ -48,7 +50,14 @@ export default function DynamicBox({passage}:DynamicBoxProps){
         display:showComment?'block':'none'
       }}>
         <div>
-
+          <CommentInput
+            value={commentInput}
+            onChange={(e)=>setCommentInput(e.target.value)}
+            columns={1}
+            width={660}
+            placeholder={"输入评论"}
+            tools={{emj:true,img:true}}
+          />
         </div>
         <div className="dynamicBox-comment-all">
           <div style={{
@@ -56,7 +65,7 @@ export default function DynamicBox({passage}:DynamicBoxProps){
           }}>全部评论</div>
           {passage.comment.map((v,ind)=>{
             return (
-              <div className="dynamicBox-content-item">
+              <div className="dynamicBox-content-item" key={v.commentID}>
                 <div className="dynamicBox-comment-header">
                   <img className="dynamicBox-comment-avatar" src="https://i0.hdslb.com/bfs/face/566078c52b408571d8ae5e3bcdf57b2283024c27.jpg@240w_240h_1c_1s.webp" alt=""/>
                   <div style={{
