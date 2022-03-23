@@ -3,7 +3,7 @@ import { ResponseBody } from '../types/network';
 import useMysql from "../hooks/useMysql";
 import useJWTCheck from "../hooks/useJWTCheck";
 import JWT, {JwtPayload} from "jsonwebtoken";
-
+import useAuth from "../hooks/useAuth";
 const router = new Router({
   prefix:'/api/user/'
 })
@@ -73,5 +73,17 @@ router.post('update',async(ctx)=>{
     } as ResponseBody
   }
 })
+router.get('baseinfo',async (ctx)=>{
+  let answer = useAuth(ctx)
+  if(answer[0]){
+    ctx.response.body=answer[1]
+  }
+  let payload = answer[1] as JwtPayload
+  let userid=payload.id
+  let userBaseInfo = await useMysql(`SELECT * From UserBaseInfo where id=${userid}`)
+  let followingCnt = await useMysql(`SELECT COUNT(user_id) From Follower where follower_id=${userid}`)
+  let followerCnt = await useMysql(`SELECT COUNT(follower_id From Follower where user_id=${userid}`)
+  let dynamicList = await useMysql(`SELECT * From Dynamic where author_id=${userid} LIMIT=10`)
 
+})
 export default router

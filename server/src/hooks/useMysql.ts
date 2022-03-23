@@ -32,3 +32,5 @@ export default async function useMysql<T>(sql:string):Promise<Array<T>|Error>{
     return err
   })
 }
+export async function useTransaction<T extends ()=>any>(fn:T){
+}

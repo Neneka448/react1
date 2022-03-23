@@ -1,6 +1,6 @@
 import JWT, {JsonWebTokenError, TokenExpiredError} from "jsonwebtoken";
 
-export default function useJWTCheck(token:string):JWT.JwtPayload|string{
+export default function useJWTCheck(token:string):JWT.JwtPayload{
   try{
     let t= JWT.verify(token,RSAPrivateKey)
     return t as JWT.JwtPayload
