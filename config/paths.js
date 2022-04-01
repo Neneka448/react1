@@ -20,7 +20,6 @@ const publicUrlOrPath = getPublicUrlOrPath(
   require(resolveApp('package.json')).homepage,
   process.env.PUBLIC_URL
 );
-
 const buildPath = process.env.BUILD_PATH || 'build';
 
 const moduleFileExtensions = [
@@ -49,7 +48,6 @@ const resolveModule = (resolveFn, filePath) => {
 
   return resolveFn(`${filePath}.js`);
 };
-
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),

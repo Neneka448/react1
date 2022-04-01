@@ -1,14 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {Suspense, useEffect, useState} from 'react';
 import {Routes, Route, useNavigate, useMatch, useResolvedPath, Outlet} from 'react-router-dom'
 import './App.css';
 import {Home} from "./view/Home/Home";
-import PassageView from "./view/Home/PassageView";
-import { LoginPage } from './view/LoginPage';
-import {ProfileUpdatePage} from "./view/User/Profile";
-import PassageViewer from "./view/Home/PassageView/PassageViewer/PassageViewer";
-import Pins from './view/Pins/Pins';
 import NavBar from './view/NavBar/NavBar'
 import ReactDOM from "react-dom";
+import PassageManage from "@/view/Creator/PassageManage/PassageManage";
+import PassageManageItem from "@/view/Creator/PassageManage/PassageManageItem";
+import Draft from './view/Creator/PassageManage/Draft';
+const PassageView = React.lazy(()=>import("./view/Home/PassageView"));
+const LoginPage =React.lazy(()=>import( './view/LoginPage'));
+const ProfileUpdatePage = React.lazy(()=>import( "./view/User/Profile"));
+const PassageViewer = React.lazy(()=>import("./view/Home/PassageView/PassageViewer/PassageViewer"));
+const Pins =React.lazy(()=>import( './view/Pins/Pins'));
+const Creator =React.lazy(()=>import( "@/view/Creator/Creator"));
+const ComposeActivity =React.lazy(()=>import('./view/Creator/ComposeActivity/ComposeActivity'));
 
 
 interface LoginDialogProps{
@@ -41,9 +46,10 @@ function App() {
   const toggleLoginPageVisible = ()=>{setLoginPageVisibility(!LoginPageVisibility)}
   return (
     <div className="App">
-      <NavBar
+      {ReactDOM.createPortal(<NavBar
         setClose={toggleLoginPageVisible}
-      />
+      />,document.getElementById('root')!)}
+
       {LoginPageVisibility && <LoginDialog setClose={toggleLoginPageVisible}/>}
       <Routes>
         <Route path="passage" element={<Home/>}>
@@ -56,6 +62,36 @@ function App() {
         <Route path="news" element={<div>资讯</div>}/>
         <Route path="events" element={<div>活动</div>}/>
         <Route path="user" element={<div className="app-user"><ProfileUpdatePage/></div>}/>
+        <Route path="creator" element={<Creator/>}>
+          <Route index element={<div>home</div>}/>
+          <Route path={"home"} element={<ComposeActivity/>}>
+          </Route>
+          <Route path={"content"}>
+            <Route path={"article"} element={<PassageManage/>}>
+              <Route path={"essays"} element={<PassageManageItem/>}>
+
+              </Route>
+              <Route path={"draft"} element={<Draft/>}>
+
+              </Route>
+            </Route>
+            <Route path={"column"}>
+
+            </Route>
+            <Route path={"pins"}>
+
+            </Route>
+          </Route>
+          <Route path={"data"} element={<div>home</div>}>
+            <Route path={"content"}>
+
+            </Route>
+            <Route path={"article"}>
+
+            </Route>
+          </Route>
+
+        </Route>
       </Routes>
     </div>
   );

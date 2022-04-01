@@ -73,7 +73,7 @@ const CommentInput: React.FC<CommentProps> = (props) => {
   },[])
 
   const classname = classnames('commentInput-base', className)
-  return (
+  return /*__PURE__*/ (
     <div ref={ref}>
       <div className="pins-main-input">
         <textarea

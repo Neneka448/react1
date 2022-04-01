@@ -43,37 +43,9 @@
   cursor: pointer;
   color: #96a7bd;
 }
-.dynamicBox-comment-avatar{
-  width: 40px;
-  border-radius: 40px;
-}
-
-.dynamicBox-comment-header{
-  display: flex;
-  align-items: flex-start;
-}
 
 .dynamicBox-content-item{
   padding: 10px;
-  background-color: rgb(252,252,252);
-}
-
-.dynamicBox-comment-content{
-  color:#4e5969;
-  font-size: 14px;
-  margin-top:14px;
-}
-
-.dynamicBox-comment-tools{
-  margin-top:10px;
-  display: flex;
-  font-size: 12px;
-  color:#86909c
-}
-
-.dynamicBox-comment-tools-btn:hover{
-  cursor: pointer;
-  color:rgb(20,128,255);
 }
 .dynamicBox-comment-all{
   margin-top:10px;

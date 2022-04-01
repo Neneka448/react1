@@ -6,7 +6,7 @@ import {useRequest} from "../../../hooks/useRequest";
 import {UserInfo} from '../../../types/UserTypes'
 import {ProfileUpdateAction} from "../../../store/UserAction";
 
-export function ProfileUpdatePage(){
+export default function ProfileUpdatePage(){
   const navigate = useNavigate()
   const routerState=useLocation()
   const [store,setStore] = useState(Store.getState())

@@ -28,7 +28,7 @@ const Button:React.FC<ButtonType>=(props)=>{
     [`button-${btnType}`]:btnType,
     [`button-${size}`]:size,
   },{className:className})
-  return (
+  return /*__PURE__*/ (
     <button {...restProps} className={classname}>
       {loading?<FontAwesomeIcon icon={faSpinner}  className="btn-loading"/>:null}{children}
     </button>

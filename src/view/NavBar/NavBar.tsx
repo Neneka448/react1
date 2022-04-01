@@ -84,9 +84,14 @@ export default function NavBar(props:NavProps){
         <div className="navbar-right-tools">
           <input className="navbar-right-tools-search" type="search" placeholder="搜索稀土掘金"/>
           <div className="navbar-right-tools-compose">
-            <button style={{
-              backgroundColor:'rgb(30,127,256)',
-            }}>创作者中心</button>
+            <button
+              style={{
+                backgroundColor:'rgb(30,127,256)',
+              }}
+              onClick={()=>{
+                navigate('/creator/home')
+              }}
+            >创作者中心</button>
             <button
               className='arrow'
               onMouseEnter={()=>setComposeMenuShow(true)}

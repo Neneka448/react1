@@ -82,7 +82,126 @@ export const _dynamic=[{
     content:'爱你',
     commentID:'222',
     date:new Date('2022-2-3').toString(),
-    reply:[],
+    reply:[{
+      author:{
+        avatar:'',
+        username:'嘉然Diana',
+        occupation:'diana',
+        company:'',
+        signature:''
+      },
+      content:'嗨呀是我吗~',
+      commentID:'2222',
+      date:new Date('2022-2-4').toString(),
+      reply:[],
+      likes:1111,
+    },{
+      author:{
+        avatar:'',
+        username:'嘉然Diana',
+        occupation:'diana',
+        company:'',
+        signature:''
+      },
+      content:'嗨呀是我吗~',
+      commentID:'2222',
+      date:new Date('2022-2-4').toString(),
+      reply:[],
+      likes:1111,
+    }],
+    likes:1111,
+  }],
+  date:new Date('2022-2-2').toString()
+},{
+  title:'111',
+  desc:'',
+  dynamicID:'111',
+  author:{
+    avatar:'',
+    username:'嘉然Diana',
+    occupation:'diana',
+    company:'',
+    signature:''
+  },
+  content:'哈喽哈喽听得到吗',
+  likes:111,
+  comment:[{
+    author:{
+      avatar:'',
+      username:'向晚大魔王',
+      occupation:'ava',
+      company:'',
+      signature:''
+    },
+    content:'爱你',
+    commentID:'222',
+    date:new Date('2022-2-3').toString(),
+    reply:[{
+      author:{
+        avatar:'',
+        username:'嘉然Diana',
+        occupation:'diana',
+        company:'',
+        signature:''
+      },
+      content:'嗨呀是我吗~',
+      commentID:'2222',
+      date:new Date('2022-2-4').toString(),
+      reply:[],
+      likes:1111,
+    },{
+      author:{
+        avatar:'',
+        username:'嘉然Diana',
+        occupation:'diana',
+        company:'',
+        signature:''
+      },
+      content:'嗨呀是我吗~',
+      commentID:'22122',
+      date:new Date('2022-2-4').toString(),
+      reply:[],
+      likes:1111,
+    }],
+    likes:1111,
+  },{
+    author:{
+      avatar:'',
+      username:'向晚大魔王',
+      occupation:'ava',
+      company:'',
+      signature:''
+    },
+    content:'爱你',
+    commentID:'2212',
+    date:new Date('2022-2-3').toString(),
+    reply:[{
+      author:{
+        avatar:'',
+        username:'嘉然Diana',
+        occupation:'diana',
+        company:'',
+        signature:''
+      },
+      content:'嗨呀是我吗~',
+      commentID:'22122',
+      date:new Date('2022-2-4').toString(),
+      reply:[],
+      likes:1111,
+    },{
+      author:{
+        avatar:'',
+        username:'嘉然Diana',
+        occupation:'diana',
+        company:'',
+        signature:''
+      },
+      content:'嗨呀是我吗~',
+      commentID:'22222',
+      date:new Date('2022-2-4').toString(),
+      reply:[],
+      likes:1111,
+    }],
     likes:1111,
   }],
   date:new Date('2022-2-2').toString()

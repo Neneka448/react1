@@ -1,8 +1,16 @@
 import './Home.css'
-import {Outlet} from "react-router-dom";
+import {Outlet, useMatch, useNavigate, useResolvedPath} from "react-router-dom";
 import {WrappedLink} from "../../components/WrappedLink";
 import InfoWidget from "../../components/InfoWidget";
+import {useEffect} from "react";
 export function Home(){
+  const isUrlMatched=useMatch({path:useResolvedPath('/passage').pathname,end:true})
+  const navigate=useNavigate()
+  useEffect(()=>{
+    if(isUrlMatched){
+      navigate('recommended')
+    }
+  })
   return (
     <div>
       <nav className="home-navbar">

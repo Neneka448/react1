@@ -3,7 +3,6 @@
   height:40px;
   box-shadow:1px 0 2px rgba(0,0,0,0.25);
   position:fixed;
-  margin-top:60px;
   width:100%;
   z-index:100;
 }
@@ -22,7 +21,7 @@
 .home-content{
   position:relative;
   margin-left:250px;
-  padding-top:110px;
+  padding-top:50px;
 }
 .home-content-passage{
   position:absolute;

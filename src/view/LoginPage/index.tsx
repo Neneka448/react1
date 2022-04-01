@@ -12,7 +12,7 @@ interface UserData{
   token:string
 }
 
-export function LoginPage(props:LoginPageProps){
+export default function LoginPage(props:LoginPageProps){
   const [pageState,setPageState] = useState('login')
   const [account,setAccount] = useState('')
   const [psw,setPsw] = useState('')

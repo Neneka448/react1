@@ -1,0 +1,17 @@
+.swiper-swiperItem{
+  position: absolute;
+}
+.swiper-display{
+  position: relative;
+}
+@keyframes xxx {
+  from{
+    transform: translateX(0%);
+  }
+  to{
+    transform: translateX(-100%);
+  }
+}
+.swiper-transform{
+  animation: xxx 5s 2s ease-in-out;
+}

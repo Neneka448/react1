@@ -1,0 +1,17 @@
+.pmi-nav{
+  display: flex;
+  margin-bottom: 10px;
+}
+.pmi-nav-item{
+  margin-right: 6px;
+}
+.pmi-nav-item:hover{
+  cursor: pointer;
+  color:#1c78f0;
+}
+.pmi-nav-active{
+  color: #1c78f0;
+}
+.pmi{
+  height: 76vh;
+}

@@ -1,0 +1,34 @@
+.pm-tot{
+  background-color: white;
+}
+.pm-nav{
+  width: 100%;
+  height: 46px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  box-sizing: border-box;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  border-bottom: 2px solid rgb(244,244,245);
+}
+.pm-nav-tab{
+  display: flex;
+}
+
+.pm-nav-tabItem{
+  box-sizing: border-box;
+  color: rgb(142,144,156);
+  margin-right: 10px;
+  user-select: none;
+  line-height: 46px;
+}
+.pm-nav-tabItem:hover{
+  cursor: pointer;
+  color:#1c78f0;
+}
+.pm-nav-active{
+  color: #1c78f0;
+  border-bottom: #1c78f0 solid 1px;
+}

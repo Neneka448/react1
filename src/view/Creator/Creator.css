@@ -1,0 +1,23 @@
+.creator-container{
+  margin-top:20px;
+  display: flex;
+}
+
+.creator-leftBar{
+  margin-left: 140px;
+  width: fit-content;
+  background-color: white;
+}
+.creator-leftBar-info{
+
+}
+.creator-leftBar-info-avatar{
+  text-align: center;
+  vertical-align: middle;
+  padding:15px;
+}
+.creator-rightBar{
+  margin-left: 26px;
+  width: 942px;
+
+}

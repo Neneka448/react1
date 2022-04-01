@@ -1,0 +1,58 @@
+.menu-base{
+  background-color:white;
+  display: flex;
+  width: 200px;
+  padding:10px;
+  font-size: 1.2rem;
+}
+.menu-direction-vertical{
+  flex-direction: column;
+}
+.menu-list-wrapper{
+  color:rgb(78,89,105);
+  overflow: hidden;
+}
+.menu-list-end{
+  color:rgb(78,89,105);
+  padding-top:10px;
+  padding-bottom:10px;
+  border-radius: 4px;
+  padding-left: 16px;
+}
+.menu-list-childItem{
+  display: none;
+  padding-left: 48px;
+  padding-top:10px;
+  padding-bottom:10px;
+
+  color:rgb(134,144,156)
+}
+
+.menu-list-wrapper-title{
+  padding-bottom: 10px;
+  padding-top:10px;
+  margin-left:16px;
+}
+.menu-list-end:not(.active):hover,.menu-list-wrapper-title:hover,.menu-list-childItem:not(.active):hover{
+  cursor: pointer;
+  background-color:rgb(250,250,250);
+}
+.collapse-arrow{
+  float: right;
+  margin-right: 5px;
+}
+
+.collapse-open .collapse-arrow{
+  transform: rotate(180deg);
+  transition: transform linear 0.1s;
+}
+.collapse-open .menu-list-childItem{
+  display: block;
+}
+.active{
+  color:rgb(0,127,255);
+  background-color:rgb(232,243,255);
+}
+.isActiveParent{
+  color:rgb(0,127,255)
+}

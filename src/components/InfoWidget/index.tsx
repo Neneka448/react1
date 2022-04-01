@@ -9,7 +9,7 @@ interface Props{
 
 
 export default function InfoWidget({header,content,footer}: Props){
-  return (
+  return /*__PURE__*/ (
     <>
     {header||null}
     {content||null}
