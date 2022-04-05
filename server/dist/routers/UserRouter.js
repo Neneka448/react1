@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const koa_router_1 = __importDefault(require("koa-router"));
 const useMysql_1 = __importDefault(require("../hooks/useMysql"));
 const useJWTCheck_1 = __importDefault(require("../hooks/useJWTCheck"));
+const useAuth_1 = __importDefault(require("../hooks/useAuth"));
 const router = new koa_router_1.default({
     prefix: '/api/user/'
 });
@@ -75,6 +76,18 @@ router.post('update', async (ctx) => {
             temp: new Date().getTime().toString()
         };
     }
+});
+router.get('baseinfo', async (ctx) => {
+    let answer = (0, useAuth_1.default)(ctx);
+    if (answer[0]) {
+        ctx.response.body = answer[1];
+    }
+    let payload = answer[1];
+    let userid = payload.id;
+    let userBaseInfo = await (0, useMysql_1.default)(`SELECT * From UserBaseInfo where id=${userid}`);
+    let followingCnt = await (0, useMysql_1.default)(`SELECT COUNT(user_id) From Follower where follower_id=${userid}`);
+    let followerCnt = await (0, useMysql_1.default)(`SELECT COUNT(follower_id From Follower where user_id=${userid}`);
+    let dynamicList = await (0, useMysql_1.default)(`SELECT * From Dynamic where author_id=${userid} LIMIT=10`);
 });
 exports.default = router;
 //# sourceMappingURL=UserRouter.js.map
