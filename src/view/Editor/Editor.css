@@ -1,0 +1,48 @@
+.editor-main{
+ height: calc(100vh - 0.6rem);
+}
+.editor-title{
+  position: fixed;
+  top:0;
+  padding: 0.06rem;
+  background-color: white;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+}
+.editor-title-input{
+  margin-left: 0.2rem;
+}
+.editor-title-input input{
+  height: 0.4rem;
+  width: 11rem;
+  font-size: 0.26rem;
+  outline: none;
+  border:none;
+}
+.editor-title-toolbar{
+  display: flex;
+  align-items: center;
+}
+.editor-switch{
+  font-size: 0.26rem;
+  margin-right: 0.12rem;
+}
+.editor-title-toolbar-publish{
+  width: 0.8rem !important;
+  margin-right: 0.16rem;
+  margin-left: 0.08rem;
+}
+
+.editor-title-toolbar-draft{
+  width: 0.8rem !important;
+  background-color: white !important;
+  color: rgb(0,127,255) !important;
+  border:#1c78f0 0.01rem solid !important;
+  margin-right: 0.16rem;
+}
+.editor-md-editor{
+
+}

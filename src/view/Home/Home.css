@@ -1,55 +1,94 @@
 .home-navbar{
   background-color:white;
-  height:40px;
-  box-shadow:1px 0 2px rgba(0,0,0,0.25);
+  height:0.4rem;
+  box-shadow:0.01rem 0 0.02rem rgba(0,0,0,0.25);
   position:fixed;
   width:100%;
   z-index:100;
 }
 .home-navbar-item{
-  margin-right: 10px;
-  font-size:14px;
+  margin-right: 0.1rem;
+  font-size:0.14rem;
 }
 .home-navbar-list{
   margin:auto;
   display:flex;
   align-items:center;
-  max-width:960px;
-  line-height:40px;
+  max-width:9.6rem;
+  line-height:0.4rem;
 }
 
 .home-content{
-  position:relative;
-  margin-left:250px;
-  padding-top:50px;
+  display: flex;
+  justify-content: center;
+  padding-top:0.5rem;
 }
 .home-content-passage{
-  position:absolute;
   background-color:white;
+  margin-right: 0.2rem;
 }
 .home-content-sidebar{
-  position:absolute;
-  left:730px;
+  margin-left: 0.2rem;
+  width: 2.2rem;
 }
 
 
 .home-content-sidebar-welcome{
   background-color:white;
-  width:240px;
-  margin-bottom:15px;
+  width:100%;
+  margin-bottom:0.15rem;
 }
 
-.home-content-sidebar-ad img{
-  width:240px;
-}
 
 .home-content-sidebar-download{
-  margin-top:10px;
+  margin-top:0.1rem;
   background-color:white;
-  padding:10px;
+  padding:0.1rem;
 }
 
 .home-content-sidebar-authorRank{
   background-color:white;
-  margin-top:10px;
+  margin-top:0.1rem;
+}
+.home-checkin-hello{
+  padding: 0.16rem;
+}
+.home-checkin-desc{
+  text-align: center;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  padding-bottom: 0.16rem;
+}
+.home-download-img{
+  width: 0.6rem;
+  margin-right: 0.06rem;
+}
+.home-content-sidebar-ad img{
+  width: 100%;
+}
+
+
+@keyframes hiddenHomeNavbar {
+  from{
+    top:0.6rem
+  }
+  to{
+    top:0
+  }
+}
+@keyframes showHomeNavbar {
+  from{
+    top:0
+  }
+  to{
+    top:0.6rem
+  }
+}
+.homeNavbarHidden{
+  animation: hiddenHomeNavbar linear 0.3s;
+  top:0
+}
+.homeNavbarVisible{
+  animation: showHomeNavbar linear 0.3s;
+  top:0.6rem
 }

@@ -1,6 +1,6 @@
 
 .button-base{
-  border-radius:2px;
+  border-radius:0.02rem;
   border:none;
   outline:none;
   color: white;
@@ -36,10 +36,10 @@
 
 
 .button-default{
-  @include button-size(1rem,2rem,8rem);
+  @include button-size(0.2rem,0.4rem,2.0rem);
 }
 .button-small{
-  @include button-size(0.8rem,1.8rem,6rem);
+  @include button-size(0.15rem,0.3rem,1.5rem);
 }
 .button-large{
   @include button-size(1.5rem,3rem,10rem);
@@ -55,7 +55,7 @@
 }
 
 .btn-loading{
-  margin-right: 5px;
+  margin-right: 0.05rem;
   animation-name: loading-rotate;
   animation-duration: .5s;
   animation-iteration-count: infinite;

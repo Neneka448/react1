@@ -64,10 +64,10 @@ export default function Pins(){
         <div className="pins-myInfo">
           <div>
             <div className="pins-myInfo-intro">
-              <img src="https://oss.rosmontis.top/passageOther/1630459995064.jpg" width="50" alt=""/>
+              <img src="https://oss.rosmontis.top/passageOther/1630459995064.jpg" style={{width:"0.7rem"}} alt=""/>
               {'Diana'||user.userInfo.username}
             </div>
-            <Divider type='horizontal' color="rgb(228,230,235)" lineWidth={1} interval={20}/>
+            <Divider type='horizontal' color="rgb(228,230,235)" lineWidth={1} interval={10}/>
             <div className="pins-myInfo-intro-baseInfo">
               {rightBarUserInfo.map(v=>(
                 <div key={v.key} className="pins-myInfo-intro-item">
@@ -79,9 +79,9 @@ export default function Pins(){
           </div>
         </div>
         <div className="pins-recommend">
-          <div style={{padding:'10px 10px 0 10px'}}>精选沸点</div>
+          <div style={{padding:'0.1rem 0.1rem 0 0.1rem'}}>精选沸点</div>
           <Divider type='horizontal' color="rgb(228,230,235)" lineWidth={1}/>
-          <div style={{padding:'0 10px 10px 10px'}}>
+          <div style={{padding:'0 0.1rem 0.1rem 0.1rem'}}>
             {recommendPins.map(v=>(
               <div className="pins-recommend-item" key={v.title}>
                 <div className="pins-recommend-item-header">
@@ -93,7 +93,7 @@ export default function Pins(){
                     }}>{v.likes}赞·{v.reply}回复</div>
                   </div>
                   <div className="pins-recommend-header-img">
-                    <img src="https://oss.rosmontis.top/passageOther/1630459995064.jpg" alt="1" width={60}/>
+                    <img src="https://oss.rosmontis.top/passageOther/1630459995064.jpg" alt="1"/>
                   </div>
                 </div>
 

@@ -5,9 +5,10 @@ interface RequestOptions<T>{
   manual?:boolean;
   callback?:(data:T|undefined,err:RequestError|null)=>void
 }
-interface ResponseBody{
-  status:'ok'|'error';
-  data:string;
+interface ResponseBody<T>{
+  status:'ok'|'err';
+  desc:string;
+  data:T;
   temp:string;
 }
 interface RequestError{
@@ -64,13 +65,11 @@ function useRequest<T>(
       let cancelToken=Axios.CancelToken
       let source=cancelToken.source()
       config.cancelToken=source.token
-      AxiosIns.getInstance().request(configs).then((v:ResponseBody)=>{
-        console.log(v)
-        if(v.status==='error'){
-          setError(JSON.parse(v.data) as RequestError)
+      AxiosIns.getInstance().request(configs).then((v:ResponseBody<T>)=>{
+        if(v.status==='err'){
+          setError(JSON.parse(v.desc) as RequestError)
         }else if(v.status==='ok'){
-
-          setRequestData(JSON.parse(v.data) as T)
+          setRequestData(v.data)
         }
         setLoading(false)
         setReady(false)

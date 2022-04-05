@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 import PassageManage from "@/view/Creator/PassageManage/PassageManage";
 import PassageManageItem from "@/view/Creator/PassageManage/PassageManageItem";
 import Draft from './view/Creator/PassageManage/Draft';
+import Editor from "@/view/Editor/Editor";
 const PassageView = React.lazy(()=>import("./view/Home/PassageView"));
 const LoginPage =React.lazy(()=>import( './view/LoginPage'));
 const ProfileUpdatePage = React.lazy(()=>import( "./view/User/Profile"));
@@ -17,19 +18,19 @@ const ComposeActivity =React.lazy(()=>import('./view/Creator/ComposeActivity/Com
 
 
 interface LoginDialogProps{
-  setClose:()=>void
+  setClose:(sta?:boolean)=>void
 }
+
 function LoginDialog({setClose}:LoginDialogProps){
   return (
     ReactDOM.createPortal((<>
       <div className="loginPage">
-        <LoginPage closeCtl={setClose}/>
+        <LoginPage closeCtl={()=>setClose(false)}/>
       </div>
       <div className="loginPage-mask"
-           onClick={setClose}
+           onClick={()=>setClose(false)}
       />
     </>),document.getElementById('root')!)
-
   )
 }
 
@@ -38,12 +39,11 @@ function App() {
   let isUrlMatched=useMatch({path:useResolvedPath('/').pathname,end:true})
   let navigate=useNavigate()
   useEffect(()=>{
-    console.log(process.env)
     if(isUrlMatched){
       navigate('passage/recommended')
     }
   },[navigate,isUrlMatched])
-  const toggleLoginPageVisible = ()=>{setLoginPageVisibility(!LoginPageVisibility)}
+  const toggleLoginPageVisible = (sta?:boolean)=>{console.log(sta);setLoginPageVisibility(sta===undefined?!LoginPageVisibility:sta)}
   return (
     <div className="App">
       {ReactDOM.createPortal(<NavBar
@@ -92,6 +92,7 @@ function App() {
           </Route>
 
         </Route>
+        <Route path={"editor"} element={<Editor/>}></Route>
       </Routes>
     </div>
   );

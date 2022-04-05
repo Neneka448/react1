@@ -1,42 +1,45 @@
 .dynamicBox-header-avatar{
-  width: 55px;
-  border-radius: 40px;
-  margin-right: 10px;
+  width: 0.55rem;
+  border-radius: 0.4rem;
+  margin-right: 0.1rem;
 }
 
 .dynamicBox-header{
   display: flex;
   align-items: center;
+  margin-bottom: 0.06rem;
 }
 
 .dynamicBox-header-authorInfo{
-  font-size: 14px;
+  font-size: 0.14rem;
   color:#909090;
 }
 .dynamicBox-header-author{
-  height: 40px;
+  height: 0.4rem;
+  font-size: 0.15rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .dynamicBox-content{
-  margin-left: 65px;
+  margin-left: 0.65rem;
+  font-size: 0.15rem;
 }
 
 .dynamicBox-footer{
-  margin-top:25px;
+  margin-top:0.25rem;
   display: flex;
-  border-top:1px solid rgb(228,230,235);
-  height: 30px;
-  line-height: 30px;
+  border-top:0.01rem solid rgb(228,230,235);
+  height: 0.3rem;
+  line-height: 0.3rem;
   color:#86909c;
 }
 .dynamicBox-footer-item{
   text-align:center;
   flex:1;
-  font-size: 12px;
+  font-size: 0.12rem;
   color:#86909c;
-  line-height:35px;
+  line-height:0.35rem;
 }
 
 .dynamicBox-footer-item:hover{
@@ -45,8 +48,12 @@
 }
 
 .dynamicBox-content-item{
-  padding: 10px;
+  padding: 0.1rem;
 }
 .dynamicBox-comment-all{
-  margin-top:10px;
+  margin-top:0.1rem;
+}
+.dynamicBox-comment-all-text{
+  margin-left: 0.14rem;
+  font-size: 0.16rem;
 }

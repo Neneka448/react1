@@ -79,7 +79,8 @@ module.exports={
           {
             loader:'sass-loader'
           }
-        ]
+        ],
+        sideEffects:true
       },
       {
         test:/\.png$/,

@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
 import './index.css'
-import {useRequest} from "../../hooks/useRequest";
+import {useRequest} from "@/hooks/useRequest";
 import store from "../../store/store";
-import {LoginAction} from "../../store/UserAction";
+import {LoginAction} from "@/store/UserAction";
 import {useNavigate} from "react-router-dom";
 import Button from '../../components/Button/Button'
 interface LoginPageProps{
@@ -28,7 +28,7 @@ export default function LoginPage(props:LoginPageProps){
   },{
     manual:true
   })
-  const [signupData,signupLoading,signup,signupError]=useRequest<UserData>({
+  const [signupData,signupLoading,signup,]=useRequest<UserData>({
     url:'auth/signup',
     method:'POST',
     data:{
@@ -41,7 +41,6 @@ export default function LoginPage(props:LoginPageProps){
   const navigate = useNavigate()
   useEffect(()=>{
     if(data){
-      console.log(data.token)
       localStorage.setItem('token',data.token)
       store.dispatch(LoginAction(true,data.token))
     }
@@ -92,7 +91,7 @@ export default function LoginPage(props:LoginPageProps){
           {
             pageState==='login'?
               <Button
-                size="default"
+                size="small"
                 btnType="primary"
                 onClick={()=>login()}
                 loading={loginLoading}
@@ -100,7 +99,7 @@ export default function LoginPage(props:LoginPageProps){
               >{loginLoading?'登录中':'登录'} </Button>
               :
               <Button
-                size="default"
+                size="small"
                 btnType="primary"
                 onClick={()=>isRepeatPswOk&&signup()}
                 loading={loginLoading}

@@ -5,7 +5,8 @@ export interface UserInfo{
   username:string,
   signature:string,
   occupation:string,
-  company:string
+  company:string,
+  id:string
 }
 export interface DynamicInfo{
   title:string,

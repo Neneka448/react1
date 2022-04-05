@@ -1,0 +1,26 @@
+.pins-modal-mask{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.25);
+  z-index: 10000;
+  display: flex;
+}
+.pins-modal-main{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:1.6rem;
+  width: 6rem;
+}
+.pins-modal-content{
+  background-color: white;
+  padding: 10px 6px 10px 6px;
+  border-radius: 6px;
+}
+.pins-modal-title{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 14px;
+}

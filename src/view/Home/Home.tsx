@@ -1,19 +1,48 @@
 import './Home.css'
 import {Outlet, useMatch, useNavigate, useResolvedPath} from "react-router-dom";
-import {WrappedLink} from "../../components/WrappedLink";
+import {WrappedLink} from "@/components/WrappedLink";
 import InfoWidget from "../../components/InfoWidget";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import Store from "@/store/store";
+import classnames from 'classnames';
 export function Home(){
   const isUrlMatched=useMatch({path:useResolvedPath('/passage').pathname,end:true})
   const navigate=useNavigate()
+  const store = Store
+  const [isReading,setReading] = useState(store.getState().GlobalActionReducer.isReading)
+  Store.subscribe(()=>{
+    console.log(store.getState().GlobalActionReducer.isReading)
+    setReading(store.getState().GlobalActionReducer.isReading)
+  })
   useEffect(()=>{
     if(isUrlMatched){
       navigate('recommended')
     }
   })
+  const [shouldHidden,setHidden] = useState(false)
+  const [initialState,setInitialState] = useState(true)
+  useEffect(()=>{
+    const handler=()=>{
+      if(!shouldHidden&&document.documentElement.scrollTop/document.documentElement.scrollHeight>0.3){
+        setHidden(true)
+        if(initialState){
+          setInitialState(false)
+        }
+      }else if(shouldHidden&&document.documentElement.scrollTop/document.documentElement.scrollHeight<=0.3){
+        setHidden(false)
+      }
+    }
+    document.addEventListener('scroll',handler)
+    return ()=>{document.removeEventListener('scroll',handler)}
+  },[shouldHidden])
   return (
     <div>
-      <nav className="home-navbar">
+      {!isReading&&<nav className={classnames("home-navbar",{
+        "homeNavbarHidden":shouldHidden,
+        "homeNavbarVisible":!initialState&&!shouldHidden
+      })}
+
+      >
         <div className="home-navbar-list">
           <div className="home-navbar-item">
             <WrappedLink to='recommended'>综合</WrappedLink>
@@ -31,32 +60,19 @@ export function Home(){
             <WrappedLink to='articles'>文章</WrappedLink>
           </div>
         </div>
-      </nav>
+      </nav>}
       <div className="home-content">
-        <div className="home-content-passage">
-          <Outlet/>
-        </div>
-        <div className="home-content-sidebar">
+        <Outlet/>
+        {!isReading&&<div className="home-content-sidebar">
           <div className="home-content-sidebar-welcome">
             <InfoWidget
               header={
-                <div style={{
-                  height:'30px',
-                  lineHeight:'30px',
-                  marginLeft:'20px'
-                }}>
+                <div className={"home-checkin-hello"}>
                   下午好!
                 </div>
               }
               content={
-                <div
-                  style={{
-                    fontSize:12,
-                    height:50,
-                    lineHeight:'50px',
-                    textAlign: 'center'
-                  }}
-                >
+                <div className={"home-checkin-desc"}>
                 点亮你在社区的每一天
                 </div>
               }
@@ -73,7 +89,7 @@ export function Home(){
                 display:'flex',
                 justifyContent:'space-around'
               }}>
-                <img src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/home.e8f8c43.png" alt="" width="50px"/>
+                <img className={"home-download-img"} src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/home.e8f8c43.png" alt=""/>
                 <div style={{
                   display:'flex',
                   flexDirection:'column',
@@ -100,7 +116,7 @@ export function Home(){
 
             />
           </div>
-        </div>
+        </div>}
 
       </div>
 

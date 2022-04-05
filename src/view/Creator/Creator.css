@@ -1,12 +1,14 @@
 .creator-container{
-  margin-top:20px;
+  margin-top:0.2rem;
   display: flex;
+  justify-content: center;
 }
 
 .creator-leftBar{
-  margin-left: 140px;
   width: fit-content;
+  padding: 0.1rem;
   background-color: white;
+  height: 6rem;
 }
 .creator-leftBar-info{
 
@@ -14,10 +16,10 @@
 .creator-leftBar-info-avatar{
   text-align: center;
   vertical-align: middle;
-  padding:15px;
+  padding:0.2rem;
 }
 .creator-rightBar{
-  margin-left: 26px;
-  width: 942px;
+  margin-left: 0.26rem;
+  width: fit-content;
 
 }

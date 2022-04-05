@@ -17,7 +17,8 @@ type ProfileUpdateActionType={
     username:string,
     signature:string,
     occupation:string,
-    company:string
+    company:string,
+    id:string
   }
 }
 function LoginAction(isLogin:boolean,token?:string):LoginActionType{
@@ -29,7 +30,7 @@ function LoginAction(isLogin:boolean,token?:string):LoginActionType{
     }
   }
 }
-function ProfileUpdateAction({avatar,username, signature,occupation,company}:UserInfo)
+function ProfileUpdateAction({avatar,username, signature,occupation,company,id}:UserInfo)
   :ProfileUpdateActionType{
   return {
     type:PROFILE_UPDATE_ACTION,
@@ -38,7 +39,8 @@ function ProfileUpdateAction({avatar,username, signature,occupation,company}:Use
       username,
       signature,
       occupation,
-      company
+      company,
+      id
     }
   }
 

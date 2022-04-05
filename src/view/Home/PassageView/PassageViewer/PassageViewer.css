@@ -1,3 +1,131 @@
 .passageViewer-content{
-  width: 700px;
+  padding:0.16rem;
+  overflow: hidden;
+  margin-top: -0.7rem;
+  display: flex;
+  justify-content: center;
+}
+
+pre{
+  background-color: rgb(43,43,43);
+  color:white;
+  padding: 0.16rem;
+  font-size: 0.14rem;
+  overflow-x: scroll;
+}
+
+.passageView-header{
+  display: flex;
+  margin-bottom: 0.2rem;
+}
+.passageView-header-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.passageView-header-info-username{
+  margin-bottom: 0.04rem;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+pre::-webkit-scrollbar
+{
+  height: 0.04rem;
+  background-color: #F5F5F5;
+}
+  /*定义滚动条轨道 内阴影+圆角*/
+pre::-webkit-scrollbar-track
+{
+ border-radius: 0.1rem;
+ background-color: #F5F5F5;
+}
+  /*定义滑块 内阴影+圆角*/
+pre::-webkit-scrollbar-thumb
+{
+border-radius: 0.1rem;
+background-color: #7a7a7a;
+}
+.passageViewer-main,.passageViewer-comment{
+  overflow: hidden;
+  width: 8rem;
+  padding: 0.24rem;
+  margin-top:0.24rem;
+  background-color: white;
+  border-radius: 0.08rem;
+  box-sizing: border-box;
+}
+.passageViewer-sidebar{
+  margin-top:0.24rem;
+  margin-left: 0.2rem;
+  width: 2.6rem;
+}
+.passageViewer-leftBar{
+  position: fixed;
+  left: 0.8rem;
+  top:1.6rem;
+}
+.passageViewer-like , .passageViewer-favorite{
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius:0.5rem;
+  line-height: 0.6rem;
+  text-align: center;
+  background-color: white;
+  margin-bottom: 0.1rem;
+}
+.passageViewer-author{
+  background-color: white;
+  padding: 0.1rem;
+}
+
+.mal-sm{
+  margin-left: 0.1rem;
+}
+.mar-sm{
+  margin-right: 0.1rem;
+}
+.mat-sm{
+  margin-top: 0.1rem;
+}
+.mab-sm{
+  margin-bottom: 0.1rem;
+}
+.passageViewer-passageInfo{
+  margin-left: 0.2rem;
+}
+.passageViewer-gain-like{
+  margin-bottom: 0.1rem;
+}
+.passageViewer-main-content{
+  line-height: 0.36rem;
+}
+h1::after{
+  content: "";
+  margin-top: 0.06rem;
+  border-bottom:0.01rem solid rgb(236,236,236);
+  display: block;
+}
+.passageViewer-main-title{
+  font-size: 0.36rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+.passageViewer-comment-input{
+  display: flex;
+  align-items: center;
+}
+.passageViewer-comment-title{
+  font-size: 0.2rem;
+  font-weight: bold;
+  margin-bottom: 0.12rem;
+}
+.passageViewer-comment-input-main{
+  flex: 1;
+}
+.passageViewer-comment-input-avatar{
+  align-self: self-start;
+  margin-top:0.06rem;
+}
+.passageViewer-comment-real{
+  padding:0.2rem
 }

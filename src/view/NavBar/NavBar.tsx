@@ -8,9 +8,12 @@ import {WrappedLink} from "@/components/WrappedLink";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import classnames from "classnames";
 import {faAngleDown, faFaceSmile, faPen} from "@fortawesome/free-solid-svg-icons";
-
+import './NavBar.css'
+import Avatar from "@/components/Avatar/Avatar";
+import ReactDOM, {createPortal} from "react-dom";
+import {PinsModalBox} from "@/view/Pins/PinsModalBox/PinsModalBox";
 interface NavProps{
-  setClose:()=>void,
+  setClose:(sta?:boolean)=>void,
 }
 interface UserData{
   token:string
@@ -18,9 +21,13 @@ interface UserData{
 
 export default function NavBar(props:NavProps){
   const navigate = useNavigate()
+  const [initialState,setInitialState] = useState(true)
   const [userInfo,setUserInfo]=useState(store.getState())
   const [composeMenuShow,setComposeMenuShow] = useState(false)
-  const [loginInfo,,,error]=useRequest<UserData>({
+  const [pinsModalShow,setPinsModalShow] = useState(false)
+  const [shouldHidden,setHidden] = useState(false)
+  const [isWriting,setWriting] = useState(store.getState().GlobalActionReducer.isWriting)
+  useRequest<UserData>({
     url:'auth/login',
     method:'POST',
     data:{
@@ -29,6 +36,7 @@ export default function NavBar(props:NavProps){
   },{
     callback:(data,err)=>{
       if(data){
+        props.setClose(false)
         store.dispatch(LoginAction(true,data.token))
         localStorage.setItem('token',data.token)
       }
@@ -38,6 +46,25 @@ export default function NavBar(props:NavProps){
 
     }
   })
+  useEffect(()=>{
+    if(userInfo.UserReducer.isLogin){
+      props.setClose(false)
+    }
+  },[userInfo.UserReducer.isLogin])
+  useEffect(()=>{
+    const handler=()=>{
+      if(!shouldHidden&&document.documentElement.scrollTop/document.documentElement.scrollHeight>0.3){
+        setHidden(true)
+        if(initialState){
+          setInitialState(false)
+        }
+      }else if(shouldHidden&&document.documentElement.scrollTop/document.documentElement.scrollHeight<=0.3){
+        setHidden(false)
+      }
+    }
+    document.addEventListener('scroll',handler)
+    return ()=>{document.removeEventListener('scroll',handler)}
+  },[shouldHidden])
   const changeUserState=()=>{
     navigate('user',{
       state:{
@@ -45,21 +72,24 @@ export default function NavBar(props:NavProps){
       }
     })
   }
-  useEffect(()=>{
-    if(userInfo.UserReducer.isLogin){
-      if(props.setClose){
-        props.setClose()
-      }
-    }
-  },[userInfo.UserReducer.isLogin])
   store.subscribe(()=>{
     setUserInfo(store.getState())
+    setWriting(store.getState().GlobalActionReducer.isWriting)
   })
   const changeComposeVisible=debounce((e:React.MouseEvent<HTMLDivElement>)=>{
     setComposeMenuShow(false)
   })
+
   return (
-    <div className="navbar-container">
+    <div className={classnames("navbar-container",{
+      "navbarHidden":shouldHidden,
+      "navbarVisible":!initialState&&!shouldHidden,
+    })}
+      style={{
+        display:isWriting?'none':'flex'
+      }}
+    >
+      {pinsModalShow&&<PinsModalBox setClose={()=>setPinsModalShow(false)}/>}
       <div className="navbar-left">
         <div className="navbar-logo">
           <img src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/e08da34488b114bd4c665ba2fa520a31.svg" alt=""/>
@@ -104,20 +134,25 @@ export default function NavBar(props:NavProps){
                  onMouseLeave={changeComposeVisible}
             >
               <div className="options-btn">
-                <div className="options-btn-item"><FontAwesomeIcon icon={faPen}/> 写文章</div>
-                <div className="options-btn-item"><FontAwesomeIcon icon={faFaceSmile}/> 发沸点</div>
+                <div className="options-btn-item" onClick={()=>{navigate('/editor')}}><FontAwesomeIcon icon={faPen}/> 写文章</div>
+                <div className="options-btn-item"
+                  onClick={()=>{
+                    setPinsModalShow(true)
+                  }}
+                ><FontAwesomeIcon icon={faFaceSmile}/> 发沸点</div>
               </div>
             </div>
           </div>
+          {
+            userInfo.UserReducer.isLogin
+              ? <span onClick={changeUserState}><Avatar width={40} url={"https://oss.rosmontis.top/passageOther/1630459995064.jpg"}/></span>
+              : <button
+                className="navbar-right-loginBtn"
+                onClick={()=>props.setClose(true)}
+              >登录</button>
+          }
         </div>
-        {
-          userInfo.UserReducer.isLogin
-            ? <span onClick={changeUserState}>欢迎</span>
-            : <button
-              className="navbar-right-loginBtn"
-              onClick={props.setClose}
-            >登录</button>
-        }
+
       </div>
     </div>
   )

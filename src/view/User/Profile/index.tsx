@@ -2,9 +2,9 @@ import './index.css'
 import {createRef, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import Store from "../../../store/store";
-import {useRequest} from "../../../hooks/useRequest";
-import {UserInfo} from '../../../types/UserTypes'
-import {ProfileUpdateAction} from "../../../store/UserAction";
+import {useRequest} from "@/hooks/useRequest";
+import {UserInfo} from '@/types/UserTypes'
+import {ProfileUpdateAction} from "@/store/UserAction";
 
 export default function ProfileUpdatePage(){
   const navigate = useNavigate()

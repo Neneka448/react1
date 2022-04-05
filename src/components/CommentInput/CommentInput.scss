@@ -1,10 +1,11 @@
 .pins-main-btnGroup{
   display: flex;
+  font-size: 0.15rem;
   justify-content: space-between;
   box-sizing: border-box;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top:10px;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
+  padding-top:0.1rem;
   align-items: center;
 }
 .pins-main-btnGroup-left{
@@ -14,30 +15,31 @@
 }
 
 .pins-main-btnGroup-left div:not(:first-child){
-  margin-left:5px;
+  margin-left:0.05rem;
 }
-
 .pins-main-btnGroup-item:hover{
   color:rgb(30,128,255);
   cursor: pointer;
 }
 .pins-main-input{
   text-align: center;
+  height: fit-content;
 }
 .pins-main-input textarea{
+  width: 95%;
   resize:none;
   overflow: hidden;
-  margin-top:10px;
-  border:1px solid transparent;
+  margin-top:0.1rem;
+  border:0.01rem solid transparent;
   outline: none;
   background-color:rgb(242,243,245);
-  padding: 6px;
-  border-radius: 2px;
-  font-size: 14px;
+  padding: 0.06rem;
+  border-radius: 0.02rem;
+  font-size: 0.16rem;
   box-sizing: border-box;
 }
 .pins-main-input textarea:focus{
-  border:1px solid rgb(30,128,255);
+  border:0.01rem solid rgb(30,128,255);
   background-color: white;
 }
 

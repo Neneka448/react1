@@ -1,9 +1,9 @@
 .menu-base{
   background-color:white;
   display: flex;
-  width: 200px;
-  padding:10px;
-  font-size: 1.2rem;
+  width: 2rem;
+  padding:0.1rem;
+  font-size: 0.22rem;
 }
 .menu-direction-vertical{
   flex-direction: column;
@@ -14,24 +14,24 @@
 }
 .menu-list-end{
   color:rgb(78,89,105);
-  padding-top:10px;
-  padding-bottom:10px;
-  border-radius: 4px;
-  padding-left: 16px;
+  padding-top:0.1rem;
+  padding-bottom:0.1rem;
+  border-radius: 0.04rem;
+  padding-left: 0.16rem;
 }
 .menu-list-childItem{
   display: none;
-  padding-left: 48px;
-  padding-top:10px;
-  padding-bottom:10px;
+  padding-left: 0.48rem;
+  padding-top:0.1rem;
+  padding-bottom:0.1rem;
 
   color:rgb(134,144,156)
 }
 
 .menu-list-wrapper-title{
-  padding-bottom: 10px;
-  padding-top:10px;
-  margin-left:16px;
+  padding-bottom: 0.1rem;
+  padding-top:0.1rem;
+  padding-left:0.16rem;
 }
 .menu-list-end:not(.active):hover,.menu-list-wrapper-title:hover,.menu-list-childItem:not(.active):hover{
   cursor: pointer;
@@ -39,7 +39,7 @@
 }
 .collapse-arrow{
   float: right;
-  margin-right: 5px;
+  margin-right: 0.05rem;
 }
 
 .collapse-open .collapse-arrow{

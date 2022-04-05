@@ -37,11 +37,7 @@ const CommentItem:React.FC<CommentItemProps>=({comment,reply,className})=> {
       >
         <div className="dynamicBox-comment-header">
           <img className="dynamicBox-comment-avatar" src={reply?"https://oss.rosmontis.top/passageOther/1630459995064.jpg":"https://i0.hdslb.com/bfs/face/566078c52b408571d8ae5e3bcdf57b2283024c27.jpg@240w_240h_1c_1s.webp"} alt=""/>
-          <div style={{
-            marginLeft:10,
-            fontSize: 14,
-            flex:1
-          }}>
+          <div className={"dynamicBox-comment-info"}>
             <span>{comment.author.username}</span> | <span style={{color:'#86909c'}}>{comment.author.occupation} | {Number((new Date().getTime()-new Date(comment.date).getTime())/3600000/24).toFixed(0)}天前</span>
             <div className="dynamicBox-comment-content">
               {comment.content}
@@ -63,14 +59,14 @@ const CommentItem:React.FC<CommentItemProps>=({comment,reply,className})=> {
               value={commentInput}
               onChange={(e)=>setCommentInput(e.target.value)}
               columns={1}
-              width={reply?550:600}
+              width={reply?660:600}
               placeholder={"输入评论"}
               tools={{emj:true,img:true}}
             />:null}
             <div>
-              {comment.reply.map(v=>{
+              {comment.reply.map((v,ind)=>{
                 return (
-                  <CommentItem  comment={v} reply/>
+                  <CommentItem  key={ind} comment={v} reply/>
                 )
               })}
             </div>

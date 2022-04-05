@@ -1,6 +1,6 @@
 .dynamicBox-comment-avatar{
-  width: 40px;
-  border-radius: 40px;
+  width: 0.5rem;
+  border-radius: 0.4rem;
 }
 
 .dynamicBox-comment-header{
@@ -11,18 +11,27 @@
 
 .dynamicBox-comment-content{
   color:#4e5969;
-  font-size: 14px;
-  margin-top:14px;
+  font-size: 0.14rem;
+  margin-top:0.14rem;
 }
 
 .dynamicBox-comment-tools{
-  margin-top:10px;
+  margin-top:0.1rem;
   display: flex;
-  font-size: 12px;
+  font-size: 0.12rem;
   color:#86909c
 }
 
 .dynamicBox-comment-tools-btn:hover{
   cursor: pointer;
   color:rgb(20,128,255);
+}
+
+.dynamicBox-comment-info{
+  margin-left: 0.12rem;
+  flex: 1;
+  font-size: 0.16rem;
+}
+.dynamicBox-content-item{
+  padding: 0.1rem;
 }

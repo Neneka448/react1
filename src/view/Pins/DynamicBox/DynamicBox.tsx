@@ -60,9 +60,7 @@ export default function DynamicBox({passage}:DynamicBoxProps){
           />
         </div>
         <div className="dynamicBox-comment-all">
-          <div style={{
-            marginBottom:10
-          }}>全部评论</div>
+          <div className={"dynamicBox-comment-all-text"}>全部评论</div>
           {passage.comment.map((v,ind)=>{
             return (
               <CommentItem comment={v} key={v.commentID}/>

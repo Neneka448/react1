@@ -29,16 +29,19 @@ export const Swiper:React.FC<SwiperProps>= (props)=>{
     imgSet,
     className
   } = props
+  const width=imgSet.width/100*parseFloat(getComputedStyle(document.documentElement).fontSize)
+  const height=imgSet.height/100*parseFloat(getComputedStyle(document.documentElement).fontSize)
+  console.log(imgSet.width/100*parseFloat(getComputedStyle(document.documentElement).fontSize))
   return /*__PURE__*/ (
     <div className={classnames("swiper",className)}>
       <div style={{
-        width:imgSet.width,
-        height:imgSet.height,
+        width:width+'px',
+        height:height+'px',
         overflow:"hidden"
       }} className={"swiper-display"}>
         {imgSet.imgUrls.map((v,ind)=>{
           return (
-            <SwiperItem imgCnt={imgSet.imgUrls.length} key={v} imgUrl={v} width={imgSet.width} height={imgSet.height} initialLeft={imgSet.width*ind}/>
+            <SwiperItem imgCnt={imgSet.imgUrls.length} key={v} imgUrl={v} width={width} height={height} initialLeft={width*ind}/>
           )
         })}
       </div>
@@ -52,7 +55,6 @@ export const SwiperItem:React.FC<SwiperItemProps> = (props)=>{
   const {
     imgUrl,
     width,
-    height,
     initialLeft,
     imgCnt
   } = props
@@ -60,7 +62,7 @@ export const SwiperItem:React.FC<SwiperItemProps> = (props)=>{
   const [left,setLeft] = useState(initialLeft)
   return (
     <div className={classnames({"swiper-transform":ok},"swiper-swiperItem")} style={{
-      left:left
+      left:left+'px'
     }} onAnimationEnd={
       ()=>{
         setok(false)
@@ -75,7 +77,9 @@ export const SwiperItem:React.FC<SwiperItemProps> = (props)=>{
         },1000)
       }
     }>
-      <img src={imgUrl} width={width} height={height} alt=""/>
+      <img src={imgUrl} style={{
+        width:width+'px'
+      }} alt=""/>
     </div>
   )
 }

@@ -13,7 +13,7 @@ const Avatar:React.FC<AvatarProps> = (props)=>{
     width
   } = props
   return /*__PURE__*/ (
-    <img className={"avatar-img"} src={url} style={{width:width}} alt=""/>
+    <img className={"avatar-img"} src={url} style={{width:width/100+'rem'}} alt=""/>
   )
 }
 

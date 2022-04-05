@@ -1,26 +1,26 @@
 .activity-box-header{
   background-color: white;
-  height: 34px;
-  padding: 12px 10px 12px 10px;
-  line-height: 34px;
+  height: 0.34rem;
+  padding: 0.12rem 0.1rem 0.12rem 0.1rem;
+  line-height: 0.34rem;
   justify-content: space-between;
   display: flex;
-  font-size: 18px;
+  font-size: 0.18rem;
 }
 .activity-box-body{
-  padding: 18px;
+  padding: 0.18rem;
   box-sizing: border-box;
   background-color: white;
 }
 .activity-box{
-  margin-bottom: 20px;
+  margin-bottom: 0.2rem;
 }
 .activity-box-data{
   display: flex;
   flex-wrap: wrap;
 }
 .activity-box-data-item{
-  padding: 10px;
+  padding: 0.1rem;
   box-sizing: border-box;
   margin-right: 1%;
   margin-bottom: 1%;

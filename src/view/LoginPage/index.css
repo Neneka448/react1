@@ -2,8 +2,8 @@
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-top:4px;
-  margin-bottom:10px;
+  margin-top:0.04rem;
+  margin-bottom:0.1rem;
 }
 
 .loginPage-tools{
@@ -11,23 +11,22 @@
   width:90%;
   justify-content:space-between;
   align-items:center;
-  margin-left:10px;
-  margin-top:10px;
-  margin-bottom:10px;
+  margin-left:0.1rem;
+  margin-top:0.1rem;
+  margin-bottom:0.1rem;
 }
 .loginPage-tools-signup:hover{
   cursor: pointer;
   color:rgb(0,127,255);
 }
 .loginPage-footer{
-  font-size:13px;
+  font-size:0.13rem;
   text-align:center;
 }
 .loginPage-form{
   display:flex;
   flex-direction:column;
   justify-content:center;
-
 }
 
 .loginPage-form-input{
@@ -35,10 +34,10 @@
   width:100%;
 }
 .pswNotMatch{
-  font-size: 12px;
-  margin-bottom: 4px;
-  margin-left:10px;
-  margin-top:-5px;
+  font-size: 0.12rem;
+  margin-bottom: 0.04rem;
+  margin-left:0.1rem;
+  margin-top:-0.05rem;
   color:red;
 }
 
@@ -51,12 +50,12 @@
 }
 
 .loginPage-form-input input{
-  height:26px;
   outline:none;
   width:90%;
-  border:1px solid rgb(233,233,233);
-  margin-bottom:10px;
-  font-size:12px;
+  border:0.01rem solid rgb(233,233,233);
+  margin-bottom:0.1rem;
+  font-size:0.12rem;
+  height: 0.26rem;
 }
 
 .loginPage-loginBtn{
@@ -64,5 +63,5 @@
 }
 
 .loginPage-form-input input:focus{
-  border:1px solid rgb(0,127,255);
+  border:0.01rem solid rgb(0,127,255);
 }

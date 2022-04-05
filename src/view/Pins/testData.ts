@@ -67,7 +67,8 @@ export const _dynamic=[{
     username:'嘉然Diana',
     occupation:'diana',
     company:'',
-    signature:''
+    signature:'',
+    id:'1'
   },
   content:'哈喽哈喽听得到吗',
   likes:111,
@@ -77,7 +78,8 @@ export const _dynamic=[{
       username:'向晚大魔王',
       occupation:'ava',
       company:'',
-      signature:''
+      signature:'',
+      id:'2'
     },
     content:'爱你',
     commentID:'222',
@@ -88,7 +90,8 @@ export const _dynamic=[{
         username:'嘉然Diana',
         occupation:'diana',
         company:'',
-        signature:''
+        signature:'',
+        id:'3'
       },
       content:'嗨呀是我吗~',
       commentID:'2222',
@@ -101,7 +104,8 @@ export const _dynamic=[{
         username:'嘉然Diana',
         occupation:'diana',
         company:'',
-        signature:''
+        signature:'',
+        id:'4'
       },
       content:'嗨呀是我吗~',
       commentID:'2222',
@@ -115,13 +119,14 @@ export const _dynamic=[{
 },{
   title:'111',
   desc:'',
-  dynamicID:'111',
+  dynamicID:'153211',
   author:{
     avatar:'',
     username:'嘉然Diana',
     occupation:'diana',
     company:'',
-    signature:''
+    signature:'',
+    id:'5'
   },
   content:'哈喽哈喽听得到吗',
   likes:111,
@@ -131,10 +136,11 @@ export const _dynamic=[{
       username:'向晚大魔王',
       occupation:'ava',
       company:'',
-      signature:''
+      signature:'',
+      id:'6'
     },
     content:'爱你',
-    commentID:'222',
+    commentID:'232422',
     date:new Date('2022-2-3').toString(),
     reply:[{
       author:{
@@ -142,7 +148,8 @@ export const _dynamic=[{
         username:'嘉然Diana',
         occupation:'diana',
         company:'',
-        signature:''
+        signature:'',
+        id:'7'
       },
       content:'嗨呀是我吗~',
       commentID:'2222',
@@ -155,7 +162,8 @@ export const _dynamic=[{
         username:'嘉然Diana',
         occupation:'diana',
         company:'',
-        signature:''
+        signature:'',
+        id:'8'
       },
       content:'嗨呀是我吗~',
       commentID:'22122',
@@ -170,10 +178,11 @@ export const _dynamic=[{
       username:'向晚大魔王',
       occupation:'ava',
       company:'',
-      signature:''
+      signature:'',
+      id:'9'
     },
     content:'爱你',
-    commentID:'2212',
+    commentID:'21236212',
     date:new Date('2022-2-3').toString(),
     reply:[{
       author:{
@@ -181,10 +190,11 @@ export const _dynamic=[{
         username:'嘉然Diana',
         occupation:'diana',
         company:'',
-        signature:''
+        signature:'',
+        id:'10'
       },
       content:'嗨呀是我吗~',
-      commentID:'22122',
+      commentID:'224534122',
       date:new Date('2022-2-4').toString(),
       reply:[],
       likes:1111,
@@ -194,10 +204,11 @@ export const _dynamic=[{
         username:'嘉然Diana',
         occupation:'diana',
         company:'',
-        signature:''
+        signature:'',
+        id:'11'
       },
       content:'嗨呀是我吗~',
-      commentID:'22222',
+      commentID:'22221322',
       date:new Date('2022-2-4').toString(),
       reply:[],
       likes:1111,

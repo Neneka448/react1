@@ -1,7 +1,7 @@
 .passage-header{
-  font-size:12px;
+  font-size:0.12rem;
   color:rgb(78,89,105);
-  margin-bottom:8px;
+  margin-bottom:0.08rem;
 }
 .passage-list-element:hover{
   background-color:rgb(250,250,250);
@@ -12,20 +12,23 @@
 }
 
 .passage-footer{
-  font-size:12px;
+  font-size:0.12rem;
   color:rgb(78,89,105);
-  margin-top:8px;
+  margin-top:0.08rem;
 }
 .passage-body-title{
   font-weight:bold;
-  padding:4px 4px 4px 0;
+  padding:0.04rem 0.04rem 0.04rem 0;
 }
 .passage-body-abstract{
-  margin-top:8px;
-  margin-bottom:8px;
+  margin-top:0.08rem;
+  margin-bottom:0.08rem;
   overflow:hidden;
   color:rgb(134,144,156);
   white-space:nowrap;
-  font-size:12px;
+  font-size:0.12rem;
   text-overflow: ellipsis;
+}
+.recommend-header{
+  padding: 0.1rem;
 }

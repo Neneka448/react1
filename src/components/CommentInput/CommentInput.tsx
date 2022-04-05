@@ -36,7 +36,7 @@ interface CommentInputProps {
   tools?: toolType,
   sender?: () => void,
   value:string
-  width:number
+  width?:number
   persistShow?:boolean
 }
 
@@ -77,14 +77,13 @@ const CommentInput: React.FC<CommentProps> = (props) => {
     <div ref={ref}>
       <div className="pins-main-input">
         <textarea
+          style={{
+            height:columns*0.34+'rem'
+          }}
           className={classname}
           onChange={onChange}
           value={value}
           placeholder={placeholder}
-          style={{
-            height:30*columns,
-            width:width
-          }}
           onFocus={()=>{setToolVisible(true)}}
           {...otherProps}
         />

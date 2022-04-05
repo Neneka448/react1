@@ -1,17 +1,18 @@
 .pm-tot{
+  width: 942px;
   background-color: white;
 }
 .pm-nav{
   width: 100%;
-  height: 46px;
-  padding: 10px;
+  height: 0.46rem;
+  padding: 0.1rem;
   display: flex;
   align-items: center;
   background-color: white;
   box-sizing: border-box;
   justify-content: space-between;
-  margin-bottom: 5px;
-  border-bottom: 2px solid rgb(244,244,245);
+  margin-bottom: 0.05rem;
+  border-bottom: 0.02rem solid rgb(244,244,245);
 }
 .pm-nav-tab{
   display: flex;
@@ -20,9 +21,9 @@
 .pm-nav-tabItem{
   box-sizing: border-box;
   color: rgb(142,144,156);
-  margin-right: 10px;
+  margin-right: 0.1rem;
   user-select: none;
-  line-height: 46px;
+  line-height: 0.46rem;
 }
 .pm-nav-tabItem:hover{
   cursor: pointer;
@@ -30,5 +31,5 @@
 }
 .pm-nav-active{
   color: #1c78f0;
-  border-bottom: #1c78f0 solid 1px;
+  border-bottom: #1c78f0 solid 0.01rem;
 }

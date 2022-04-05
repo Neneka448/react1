@@ -58,12 +58,14 @@ export default function Creator(){
   })
   return (
     <div className={"creator-container"}>
-      <div className={"creator-leftBar"}>
-        <div className={"creator-leftBar-info"}>
-          <div className={"creator-leftBar-info-avatar"}><Avatar width={60} url={"https://oss.rosmontis.top/passageOther/1630459995064.jpg"}/>Diana</div>
-          <div style={{textAlign:'center'}}><Button btnType={'primary'}>写文章</Button></div>
+      <div>
+        <div className={"creator-leftBar"}>
+          <div className={"creator-leftBar-info"}>
+            <div className={"creator-leftBar-info-avatar"}><Avatar width={60} url={"https://oss.rosmontis.top/passageOther/1630459995064.jpg"}/>Diana</div>
+            <div style={{textAlign:'center'}}><Button btnType={'primary'}>写文章</Button></div>
+          </div>
+          <Menu  className={"creator-menu"} direction={'vertical'} menuList={menuListLeftBar} defaultChoose={menuListLeftBar[0]}/>
         </div>
-        <Menu  direction={'vertical'} menuList={menuListLeftBar} defaultChoose={menuListLeftBar[0]}/>
       </div>
       <div className={"creator-rightBar"}>
         <Outlet/>

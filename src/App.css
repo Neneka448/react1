@@ -1,78 +1,3 @@
-.navbar-container{
-  background-color:white;
-  font-size:16px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:60px;
-  position:fixed;
-  width:100%;
-  z-index:101;
-  box-shadow: 1px 0 2px rgba(0,0,0,.25);
-
-}
-.navbar-left{
-  display:flex;
-  align-items:center;
-}
-.navbar-right{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-right:20px;
-  width:330px;
-}
-.navbar-right-tools{
-  flex:1;
-  display:flex;
-  align-items:center;
-}
-.navbar-right-tools-search{
-  width:160px;
-  height:26px;
-  margin-right:10px;
-  outline:none;
-  border:none;
-  background-color:rgb(242,243,245);
-  font-size:12px;
-  border-radius:4px;
-}
-.navbar-right-tools-compose{
-  font-size:12px;
-  border-radius:3px;
-  position: relative;
-}
-.navbar-right-tools-compose button{
-  border:0;
-  padding:6px;
-  color:white;
-  cursor:pointer;
-
-}
-.navbar-right-tools-compose button:hover{
-  background-color:rgb(17,113,238);
-}
-.navbar-right-loginBtn{
-  border:1px solid rgb(0,127,255);
-  background-color:white;
-  border-radius:4px;
-  padding:5px 15px 5px 15px;
-  color:rgb(0,127,255);
-  font-size:14px;
-
-}
-.navbar-right-loginBtn:hover{
-  cursor:pointer;
-}
-.navbar-logo{
-  margin-right:24px;
-  margin-left:24px;
-}
-
-.navbar-item{
-  width:68px;
-}
-
 .loginPage{
   z-index:120;
   position:fixed;
@@ -82,67 +7,21 @@
   display:flex;
   background-color:white;
   flex-direction:column;
-  background-color:white;
   height:auto;
-  width:300px;
-  padding:10px;
+  width:3rem;
+  padding:0.1rem;
 }
 
 .loginPage-mask{
   width:100%;
   height:100%;
-  content:" ";
+  content:"";
   background-color:rgba(0,0,0,0.25);
   position:fixed;
-
+  top:0;
   z-index:119;
-}
-.app-user{
-  padding-top:80px;
-  width: 70%;
-  margin:0 auto;
-}
-.arrow{
-  background-color:rgb(30,127,256);
-}
-
-.arrowIconChange{
-  transform: rotate(180deg);
-  transition:transform .25s ease-in-out;
-}
-
-.navbar-right-tools-compose-options{
-  position: absolute;
-  background-color: white;
-  bottom:-85px;
-  width: 100px;
-  height:80px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.25);
-  z-index: 1;
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding:5px;
-  visibility: hidden;
-}
-
-.options-btn{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-.options-btn-item{
-  height: 30px;
-  line-height: 30px;
-  width: 100%;
-  text-align: center;
-  border-radius: 2px;
-}
-.options-btn-item:hover{
-  background-color: rgb(249,249,249);
 }
 
 .App{
-  padding-top: 60px;
+  padding-top: 0.6rem;
 }

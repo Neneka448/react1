@@ -1,4 +1,4 @@
-import {UserState} from "../types/UserTypes"
+import {UserState} from "@/types/UserTypes"
 import {LOGIN_ACTION, PROFILE_UPDATE_ACTION, UserReducerType} from "./UserAction";
 
 const defaultState:UserState={
@@ -9,10 +9,11 @@ const defaultState:UserState={
   badges:[],
   userInfo:{
     avatar:'',
-    username:'',
-    signature:'',
-    occupation:'',
-    company:''
+    username:'嘉然Diana',
+    signature:'关注嘉然顿顿解馋',
+    occupation:'枝江大学',
+    company:'',
+    id:'-1'
   },
   userDynamic:{
     dynamic:[],

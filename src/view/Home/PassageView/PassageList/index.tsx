@@ -1,8 +1,8 @@
-import {useRequest} from "../../../../hooks/useRequest";
-import {PassageData, PassageDetail} from "../../../../types/types";
+import {useRequest} from "@/hooks/useRequest";
+import {PassageData, PassageDetail} from "@/types/types";
 import './index.css'
 import {useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 interface Props{
   category:string|undefined
 }
@@ -12,7 +12,7 @@ export default function PassageList({category}:Props){
     method:'get',
     url:'passage/recommended'
   })
-  let [passageData,loadingPassageData,getPassageData,passageDataRequestError] =useRequest<PassageDetail>({
+  let [passageData,,getPassageData] =useRequest<PassageDetail>({
     method:'get',
     url:'passage/detail'
   },{
@@ -23,7 +23,7 @@ export default function PassageList({category}:Props){
       navigate(`/passage/post/${passageData.id}`,{
         state:{
           detail:passageData,
-          baseInfo:request.find(v=>v.id===parseInt(passageData!.id))
+          baseInfo:request.find(v=>v.id)
         }
       })
     }
@@ -31,15 +31,7 @@ export default function PassageList({category}:Props){
   return (
     <>
       {category==='recommended'?
-          <header
-            style={{
-              paddingBottom:10,
-              paddingTop:10,
-              paddingLeft:10,
-              borderBottom:'1px solid rgb(241,241,241)',
-              lineHeight:1,
-            }}
-          >
+          <header className={"recommend-header"}>
             推荐|最新|热榜
           </header>
         :
