@@ -10,14 +10,14 @@ import {_hotTopic,_dynamic,_recommendPins,_rightBarInfo,_sidebarList} from './te
 import CommentInput from "@/components/CommentInput/CommentInput";
 
 export default function Pins(){
-  const [user,setUser] = useState(store.getState().UserReducer)
+  const [user,setUser] = useState(store.getState().sagaReducer.UserReducer)
   const [nowActive,setActive] = useState(0)
   const [dynamicInput,setDynamicInput] = useState('')
   const [rightBarUserInfo,setRightBarUserInfo] = useState(_rightBarInfo)
   const [recommendPins,setRecommendPins] = useState(_recommendPins)
   const [hotTopic,setHotTopic] = useState(_hotTopic)
   store.subscribe(()=>{
-    setUser(store.getState().UserReducer)
+    setUser(store.getState().sagaReducer.UserReducer)
   })
   let sidebarList = _sidebarList
   let dynamicList:Array<DynamicInfo> = _dynamic
@@ -65,7 +65,7 @@ export default function Pins(){
           <div>
             <div className="pins-myInfo-intro">
               <img src="https://oss.rosmontis.top/passageOther/1630459995064.jpg" style={{width:"0.7rem"}} alt=""/>
-              {'Diana'||user.userInfo.username}
+              {'Diana'||user.username}
             </div>
             <Divider type='horizontal' color="rgb(228,230,235)" lineWidth={1} interval={10}/>
             <div className="pins-myInfo-intro-baseInfo">

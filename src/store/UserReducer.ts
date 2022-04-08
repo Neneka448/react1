@@ -1,6 +1,5 @@
 import {UserState} from "@/types/UserTypes"
-import {LOGIN_ACTION, PROFILE_UPDATE_ACTION, UserReducerType} from "./UserAction";
-
+import {PROFILE_UPDATE_ACTION, UserReducerType} from "./UserAction";
 const defaultState:UserState={
   isLogin:false,
   token:'',
@@ -37,17 +36,11 @@ const defaultState:UserState={
 
 export default (state=defaultState,action:UserReducerType) =>{
   switch (action.type) {
-    case LOGIN_ACTION:
-      return {
-        ...state,
-        ...action.payload
-      }
     case PROFILE_UPDATE_ACTION:
       return {
         ...state,
         userInfo:action.payload
       }
-
     default:
       return state
   }

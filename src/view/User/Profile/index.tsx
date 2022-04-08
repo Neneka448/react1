@@ -10,15 +10,15 @@ export default function ProfileUpdatePage(){
   const navigate = useNavigate()
   const routerState=useLocation()
   const [store,setStore] = useState(Store.getState())
-  const [username,setUsername] = useState(store.UserReducer.userInfo.username)
-  const [signature,setSignature] = useState(store.UserReducer.userInfo.signature)
-  const [occupation,setOccupation] = useState(store.UserReducer.userInfo.occupation)
-  const [company,setCompany] = useState(store.UserReducer.userInfo.company)
+  const [username,setUsername] = useState(store.sagaReducer.UserReducer.username)
+  const [signature,setSignature] = useState(store.sagaReducer.UserReducer.signature)
+  const [occupation,setOccupation] = useState(store.sagaReducer.UserReducer.occupation)
+  const [company,setCompany] = useState(store.sagaReducer.UserReducer.company)
   const [updateUserBaseInfo,isUpdateLoading,update,updateError] = useRequest<UserInfo>({
     url:'user/update',
     method:'POST',
     data:{
-      token:store.UserReducer.token,
+      token:(store.sagaReducer.AuthorizationReducer as any).token ,
       type:(routerState.state as {type:string})?.type||'',
       data:{
         avatar:'',
@@ -34,13 +34,14 @@ export default function ProfileUpdatePage(){
     setStore(Store.getState())
   })
   useEffect(()=>{
-    if(!store.UserReducer.isLogin){
+    if(!(store.sagaReducer.AuthorizationReducer as any).isLogin){
       navigate('/passage/recommended')
     }
   },[])
   useEffect(()=>{
     if(updateUserBaseInfo){
-      Store.dispatch(ProfileUpdateAction(updateUserBaseInfo))
+     // Store.dispatch(ProfileUpdateAction(updateUserBaseInfo))
+      //TODO: profile to api
     }
   },[updateUserBaseInfo])
   useEffect(()=>{

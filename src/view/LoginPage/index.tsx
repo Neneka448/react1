@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react'
+import {useCallback, useEffect, useMemo, useState} from 'react'
 import './index.css'
 import {useRequest} from "@/hooks/useRequest";
 import store from "../../store/store";
-import {LoginAction} from "@/store/UserAction";
 import {useNavigate} from "react-router-dom";
 import Button from '../../components/Button/Button'
+import {requestFactory} from "@/hooks/requestFactory";
 interface LoginPageProps{
   closeCtl:()=>void;
 }
@@ -18,16 +18,34 @@ export default function LoginPage(props:LoginPageProps){
   const [psw,setPsw] = useState('')
   const [repeatPsw,setRepeatPsw] = useState('')
   const [isRepeatPswOk,setIsRepeatPswOk] = useState(true)
-  const [data,loginLoading,login,error]=useRequest<UserData>({
-    url:'auth/login',
-    method:'POST',
+  const [loginState,setLoginState]=useState(store.getState().sagaReducer.AuthorizationReducer)
+  useEffect(()=>{
+    store.subscribe(()=>{
+      setLoginState(store.getState().sagaReducer.AuthorizationReducer)
+    })
+  },[])
+  // const [data,loginLoading,login,error]=useRequest<UserData>({
+  //   url:'auth/login',
+  //   method:'POST',
+  //   data:{
+  //     acc:account,
+  //     psw:psw
+  //   }
+  // },{
+  //   manual:true
+  // })
+  let authApi=useMemo(()=>requestFactory({
+    type:'AUTHORIZATION_REQUEST',
     data:{
-      acc:account,
-      psw:psw
-    }
-  },{
-    manual:true
-  })
+      type:'LOGIN_REQUEST',
+      payload:{
+        acc:account,
+        psw:psw
+      }
+    },
+    manual:true,
+    dispatchAction:'AUTHORIZE_REQUEST'
+  }),[account,psw])
   const [signupData,signupLoading,signup,]=useRequest<UserData>({
     url:'auth/signup',
     method:'POST',
@@ -39,29 +57,23 @@ export default function LoginPage(props:LoginPageProps){
     manual:true
   })
   const navigate = useNavigate()
-  useEffect(()=>{
-    if(data){
-      localStorage.setItem('token',data.token)
-      store.dispatch(LoginAction(true,data.token))
-    }
-  },[data])
-  useEffect(()=>{
-    if(error){
-      console.log(error)
-      alert('登陆失败')
-    }
-  },[error])
-  useEffect(()=>{
-    if(signupData){
-      localStorage.setItem('token',signupData.token)
-      store.dispatch(LoginAction(true,signupData.token))
-      navigate('/user',{
-        state:{
-          type:'newuser'
-        }
-      })
-    }
-  },[signupData])
+  // useEffect(()=>{
+  //   if(error){
+  //     console.log(error)
+  //     alert('登陆失败')
+  //   }
+  // },[error])
+  // useEffect(()=>{
+  //   if(signupData){
+  //     localStorage.setItem('token',signupData.token)
+  //     store.dispatch(LoginAction(true,signupData.token))
+  //     navigate('/user',{
+  //       state:{
+  //         type:'newuser'
+  //       }
+  //     })
+  //   }
+  // },[signupData])
   return (
     <>
       <header className="loginPage-title">
@@ -93,16 +105,16 @@ export default function LoginPage(props:LoginPageProps){
               <Button
                 size="small"
                 btnType="primary"
-                onClick={()=>login()}
-                loading={loginLoading}
-                disabled={loginLoading}
-              >{loginLoading?'登录中':'登录'} </Button>
+                onClick={()=>authApi()}
+                loading={loginState.isLoading}
+                disabled={loginState.isLoading}
+              >{loginState.isLoading?'登录中':'登录'} </Button>
               :
               <Button
                 size="small"
                 btnType="primary"
                 onClick={()=>isRepeatPswOk&&signup()}
-                loading={loginLoading}
+                loading={loginState.isLoading}
                 disabled={signupLoading||!isRepeatPswOk}
               >{signupLoading?'注册中':'注册'}</Button>
           }

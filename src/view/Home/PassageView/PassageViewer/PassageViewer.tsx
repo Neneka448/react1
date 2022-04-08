@@ -27,9 +27,9 @@ export default function PassageViewer(){
   let passage=useLocation().state as Passage
   const store = Store
   const [isReading,setReading] = useState(store.getState().GlobalActionReducer.isReading)
-  const [userInfo] = useState(store.getState().UserReducer.userInfo)
+  const [userInfo] = useState(store.getState().sagaReducer.UserReducer)
   const [commentText,setCommentText]=useState('')
-  const [userAchievement] = useState(store.getState().UserReducer.achievement)
+  // const [userAchievement] = useState(store.getState().UserReducer.achievement)
   const [parsedHtml,setParsedHtml] = useState('')
   store.subscribe(()=>{
     setReading(store.getState().GlobalActionReducer.isReading)
@@ -107,10 +107,10 @@ export default function PassageViewer(){
           </div>
           <div className={"passageViewer-passageInfo"}>
             <div className={"passageViewer-gain-like"}>
-              获得点赞: <span className={"mal-sm"}>{userAchievement.likesCount}</span>
+              {/*获得点赞: <span className={"mal-sm"}>{userAchievement.likesCount}</span>*/}//TODO:reset
             </div>
             <div>
-              文章被阅读: <span className={"mal-sm"}>{userAchievement.watchCount}</span>
+              {/*文章被阅读: <span className={"mal-sm"}>{userAchievement.watchCount}</span>*/}
             </div>
           </div>
         </div>

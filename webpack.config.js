@@ -4,8 +4,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const CopyWebpackPlugin =require('copy-webpack-plugin')
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
 process.env.NODE_ENV="production"
-
+const smp=new SpeedMeasureWebpackPlugin()
 require('dotenv-expand')(
   require('dotenv').config({
       path:path.resolve(__dirname,'./.env.local')
@@ -13,7 +16,7 @@ require('dotenv-expand')(
   )
 )
 
-module.exports={
+module.exports=smp.wrap({
   entry:'./src/index.tsx',
   devtool:process.env.NODE_ENV==='development'?"source-map":"cheap-module-source-map",
   output:{
@@ -33,21 +36,29 @@ module.exports={
     rules:[
       {
         test:/\.tsx?$/i,
+        exclude:[path.resolve(__dirname,"./node_modules")],
         use:[
+          // {
+          //   loader:'esbuild-loader',
+          //   options:{
+          //     loader:'tsx',
+          //     target:'es2015'
+          //   }
+          // },
           {
-            loader:'esbuild-loader',
-            options:{
-              loader:'tsx',
-              target:'es2015'
-            }
+            loader:'./loaders/clean-loader'
           },
+          {
+            loader: 'babel-loader',
+          },
+
         ]
       },
       {
         test:/\.css/i,
         use:[
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: "style-loader"
           },
           {
             loader:'css-loader'
@@ -113,7 +124,11 @@ module.exports={
     //new BundleAnalyzerPlugin()
     new webpack.ProvidePlugin({
       "React":"react"
+    }),
+    new CompressionWebpackPlugin({
+      algorithm:'gzip'
     })
+
   ],
   devServer:{
     hot:true,
@@ -135,6 +150,9 @@ module.exports={
     minimize: true,
     runtimeChunk:'single',
     moduleIds:'deterministic',
+    minimizer:[new TerserPlugin({
+      extractComments:true,
+    })],
     splitChunks:{
       cacheGroups:{
         vendor:{
@@ -150,5 +168,9 @@ module.exports={
       }
     }
   },
+  cache:{
+    type:'filesystem',
+    cacheDirectory:path.resolve(__dirname,'.temp_cache')
+  },
   performance: false
-}
+})

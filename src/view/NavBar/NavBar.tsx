@@ -1,8 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import store from "@/store/store";
 import {useRequest} from "@/hooks/useRequest";
-import {LoginAction} from "@/store/UserAction";
 import {debounce} from "@/utils/utils";
 import {WrappedLink} from "@/components/WrappedLink";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -10,8 +9,8 @@ import classnames from "classnames";
 import {faAngleDown, faFaceSmile, faPen} from "@fortawesome/free-solid-svg-icons";
 import './NavBar.css'
 import Avatar from "@/components/Avatar/Avatar";
-import ReactDOM, {createPortal} from "react-dom";
 import {PinsModalBox} from "@/view/Pins/PinsModalBox/PinsModalBox";
+import {requestFactory} from "@/hooks/requestFactory";
 interface NavProps{
   setClose:(sta?:boolean)=>void,
 }
@@ -22,35 +21,36 @@ interface UserData{
 export default function NavBar(props:NavProps){
   const navigate = useNavigate()
   const [initialState,setInitialState] = useState(true)
-  const [userInfo,setUserInfo]=useState(store.getState())
+  const [userInfo,setUserInfo]=useState<any>(store.getState().sagaReducer.AuthorizationReducer)
   const [composeMenuShow,setComposeMenuShow] = useState(false)
   const [pinsModalShow,setPinsModalShow] = useState(false)
   const [shouldHidden,setHidden] = useState(false)
   const [isWriting,setWriting] = useState(store.getState().GlobalActionReducer.isWriting)
-  useRequest<UserData>({
-    url:'auth/login',
-    method:'POST',
-    data:{
-      token:localStorage.getItem('token')
-    }
-  },{
-    callback:(data,err)=>{
-      if(data){
-        props.setClose(false)
-        store.dispatch(LoginAction(true,data.token))
-        localStorage.setItem('token',data.token)
-      }
-      if(err){
-        localStorage.removeItem('token')
-      }
-
-    }
-  })
+  // useRequest<UserData>({
+  //   url:'auth/login',
+  //   method:'POST',
+  //   data:{
+  //     token:localStorage.getItem('token')
+  //   }
+  // },{
+  //   callback:(data,err)=>{
+  //     if(data){
+  //       props.setClose(false)
+  //       // store.dispatch(LoginAction(true,data.token))
+  //
+  //       localStorage.setItem('token',data.token)
+  //     }
+  //     if(err){
+  //       localStorage.removeItem('token')
+  //     }
+  //
+  //   }
+  // })
   useEffect(()=>{
-    if(userInfo.UserReducer.isLogin){
+    if(userInfo.isLogin){
       props.setClose(false)
     }
-  },[userInfo.UserReducer.isLogin])
+  },[userInfo.isLogin])
   useEffect(()=>{
     const handler=()=>{
       if(!shouldHidden&&document.documentElement.scrollTop/document.documentElement.scrollHeight>0.3){
@@ -73,7 +73,7 @@ export default function NavBar(props:NavProps){
     })
   }
   store.subscribe(()=>{
-    setUserInfo(store.getState())
+    setUserInfo(store.getState().sagaReducer.AuthorizationReducer)
     setWriting(store.getState().GlobalActionReducer.isWriting)
   })
   const changeComposeVisible=debounce((e:React.MouseEvent<HTMLDivElement>)=>{
@@ -144,7 +144,7 @@ export default function NavBar(props:NavProps){
             </div>
           </div>
           {
-            userInfo.UserReducer.isLogin
+            userInfo.isLogin
               ? <span onClick={changeUserState}><Avatar width={40} url={"https://oss.rosmontis.top/passageOther/1630459995064.jpg"}/></span>
               : <button
                 className="navbar-right-loginBtn"

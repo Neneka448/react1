@@ -7,7 +7,6 @@ interface PassageViewProps{
 }
 
 export default function PassageView(props:PassageViewProps){
-  console.log(props)
   let {category}=useParams()
   return (
     <div className="passageView">

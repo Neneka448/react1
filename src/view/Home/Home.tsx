@@ -2,7 +2,7 @@ import './Home.css'
 import {Outlet, useMatch, useNavigate, useResolvedPath} from "react-router-dom";
 import {WrappedLink} from "@/components/WrappedLink";
 import InfoWidget from "../../components/InfoWidget";
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import Store from "@/store/store";
 import classnames from 'classnames';
 export function Home(){
@@ -11,7 +11,6 @@ export function Home(){
   const store = Store
   const [isReading,setReading] = useState(store.getState().GlobalActionReducer.isReading)
   Store.subscribe(()=>{
-    console.log(store.getState().GlobalActionReducer.isReading)
     setReading(store.getState().GlobalActionReducer.isReading)
   })
   useEffect(()=>{

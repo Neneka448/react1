@@ -1,8 +1,14 @@
 {
   "presets":[["@babel/preset-env",{"modules":false}],"@babel/preset-react","@babel/preset-typescript"],
-  "plugins":[ 
+  "exclude": [
+    "/node_modules[\\\/]core-js/",
+  "/node_modules[\\\/]webpack[\\\/]buildin/"
+  ],
+  "plugins":[
+    "@babel/plugin-transform-runtime",
     ["@babel/plugin-proposal-class-properties",{"loose":false}],
     ["@babel/plugin-proposal-private-methods", { "loose": false }],
     ["@babel/plugin-proposal-private-property-in-object", { "loose": false }]
   ]
+
 }

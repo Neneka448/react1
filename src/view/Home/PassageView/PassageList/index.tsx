@@ -1,17 +1,29 @@
 import {useRequest} from "@/hooks/useRequest";
-import {PassageData, PassageDetail} from "@/types/types";
+import { PassageDetail} from "@/types/types";
 import './index.css'
-import {useEffect} from "react";
-import {useNavigate, useOutletContext} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {requestFactory} from "@/hooks/requestFactory";
+import store from "@/store/store";
 interface Props{
   category:string|undefined
 }
 export default function PassageList({category}:Props){
   const navigate=useNavigate()
-  let [request] =useRequest<Array<PassageData>>({
-    method:'get',
-    url:'passage/recommended'
+  // let [request] =useRequest<Array<PassageData>>({
+  //   method:'get',
+  //   url:'passage/recommended'
+  // })
+  const[request,setRequest]=useState(store.getState().sagaReducer.passageListReducer.passageList)
+  store.subscribe(()=>{
+    setRequest(store.getState().sagaReducer.passageListReducer.passageList)
   })
+  useEffect(()=>{
+    requestFactory({
+      type: "PASSAGE_LIST_REQUEST",
+      manual:false
+    })
+  },[])
   let [passageData,,getPassageData] =useRequest<PassageDetail>({
     method:'get',
     url:'passage/detail'
